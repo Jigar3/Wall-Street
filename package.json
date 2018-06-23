@@ -6,7 +6,9 @@
   "scripts": {
     "serve": "live-server public/",
     "build": "webpack",
-    "dev-server": "webpack-dev-server"
+    "dev-server": "webpack-dev-server",
+    "start": "node server/server.js",
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,6 +22,7 @@
     "cheerio": "^1.0.0-rc.2",
     "create-react-class": "^15.6.3",
     "css-loader": "0.28.4",
+    "express": "^4.16.3",
     "firebase": "^5.0.4",
     "history": "^4.7.2",
     "iex-api": "^0.0.3",
