@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -8,7 +9,6 @@ import "react-table/react-table.css";
 class Table extends React.Component {
 
   render() {
-    console.log("Props", this.props.data)
     return (
       <div>
         <ReactTable
@@ -72,6 +72,12 @@ class Table extends React.Component {
                       <option value="Profit">Profit</option>
                       <option value="false">Loss</option>
                     </select>
+                },
+                {
+                  Header: "Sell",
+                  Cell: row => (
+                    <button onClick={() => {console.log("job success")}} >Sell</button>
+                  )
                 }
               ]
             }
@@ -86,6 +92,15 @@ class Table extends React.Component {
 }
 
 const mapStatetoProps = (state) => {
+  state.forEach((childState) => {
+    const symbol = childState.company;
+    axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote`).then((data) => {
+      childState.currPrice = data.data.quote.latestPrice,
+      childState.shareWorth = parseFloat(childState.quantity * data.data.quote.latestPrice).toFixed(2),
+      childState.profitLoss = childState.quantity * (data.data.quote.latestPrice - childState.buyPrice)
+    })
+  })
+  
   return {
     data: state
   }

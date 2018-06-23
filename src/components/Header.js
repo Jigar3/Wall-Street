@@ -10,6 +10,7 @@ const Header = () => (
             <div>
                 <NavLink to="/" activeClassName="selected" exact > Home </NavLink>
                 <NavLink to="/buy" activeClassName="selected" > Buy </NavLink>
+                <NavLink to="/graph" activeClassName="selected" > Graph </NavLink>
                 <AppRouter/>
             </div>
         </Router>

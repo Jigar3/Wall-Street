@@ -1,10 +1,12 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+// import { IEXClient } from 'iex-api';
+// import * as _fetch from 'isomorphic-fetch';
 
-axios.get("https://in.finance.yahoo.com/quote/HDFCBANK.NS/").then((data) => {
-    const page = (data.data);
-    const $ = cheerio.load(page);
+// const iex = new IEXClient(_fetch)
+// iex.stockCompany('AAPL')
+//   .then(company => console.log(company))
 
-    const price = $('span').attr('data-reactid', '35');
-    console.log(price);
+import axios from 'axios';
+
+axios.get("https://api.iextrading.com/1.0/stock/aapl/batch?types=quote").then((data) => {
+    console.log(data.data)
 })

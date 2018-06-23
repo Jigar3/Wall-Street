@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AddCompany from '../Actions/AddCompany';
+import axios from 'axios';
 
 class BuyPage extends React.Component {
   
@@ -8,30 +9,26 @@ class BuyPage extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.elements)
     const company = e.target.elements.symbol.value;
-    const quantity = e.target.elements.quantity.value;
-    const buyPrice = e.target.elements.buyPrice.value;
-    const currPrice = e.target.elements.currPrice.value;
-    const shareWorth = e.target.elements.shareWorth.value;
-    const profitLoss = e.target.elements.profitLoss.value;
-    
-    const companyDetails = {
-      company,
-      quantity,
-      buyPrice,
-      currPrice,
-      shareWorth,
-      profitLoss
-    }
-    this.props.addData(companyDetails);
+    const quantity = parseFloat(e.target.elements.quantity.value);
+    axios.get(`https://api.iextrading.com/1.0/stock/${company}/batch?types=quote`).then((data) => {
+      const buyPrice = data.data.quote.latestPrice;
+      const companyDetails = {
+        company,
+        quantity,
+        buyPrice,
+        currPrice : parseFloat(data.data.quote.latestPrice).toFixed(2),
+        shareWorth : (quantity * data.data.quote.latestPrice),
+        profitLoss : 0
+      }
+
+      this.props.addData(companyDetails);
+    }).catch((e) => {
+      console.log(e);
+    })
     
     e.target.elements.symbol.value = "";
     e.target.elements.quantity.value = "";
-    e.target.elements.buyPrice.value = "";
-    e.target.elements.currPrice.value = "";
-    e.target.elements.shareWorth.value = "";
-    e.target.elements.profitLoss.value = "";
 
     this.props.history.push("/");
   }
@@ -40,12 +37,14 @@ class BuyPage extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleOnSubmit} >
-          <input type="text" name="symbol" placeholder="Symbol"/>
-          <input type="number" name="quantity" placeholder="Quantity"/>
-          <input type="number" name="buyPrice" placeholder="Buy Price"/>
-          <input type="number" name="currPrice" placeholder="Curr Price"/>
-          <input type="number" name="shareWorth" placeholder="Share Worth"/>
-          <input type="number" name="profitLoss" placeholder="Profit Loss" />
+          <label>Symbol: </label>
+          <input type="text" name="symbol" placeholder="Symbol" required />
+          <br></br>
+          <br></br>
+          <label>Quantity: </label>
+          <input type="number" name="quantity" placeholder="Quantity" required />
+          <br></br>
+          <br></br>
           <button>Submit</button>
         </form>
       </div>

@@ -15,26 +15,13 @@ const App = () => (
   </Provider>
 )
 
-const data = {
-  company: "INFY",
-  quantity: 10,
-  buyPrice: 1070,
-  currPrice: 1090,
-  shareWorth: 10900,
-  profitLoss: 200
-}
-
-const newData = {
-  company: "HDFCBANK",
-  quantity: 10,
-  buyPrice: 1600,
-  currPrice: 1610,
-  shareWorth: 16100,
-  profitLoss: 100
-}
-
-store.dispatch(AddCompany(data));
-store.dispatch(AddCompany(newData));
-console.log(store.getState());
+// store.dispatch(AddCompany({
+//   company: "GOOG",
+//   quantity: 10,
+//   buyPrice: 100,
+//   currPrice: 100,
+//   shareWorth: 1000,
+//   profitLoss: 0
+// }))
 
 ReactDOM.render(<App/>, document.getElementById("app"))
