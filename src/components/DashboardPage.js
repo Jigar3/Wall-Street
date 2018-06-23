@@ -1,8 +1,9 @@
 import React from 'react';
+import Table from './Table';
 
 const DashboardPage = () => (
-  <div>
-    <h1>DashBoard Page</h1>
+  <div className="container" >
+    <Table />
   </div>
 )
 
