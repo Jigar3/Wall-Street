@@ -5,7 +5,7 @@ const AddCompany = ( companyDetail = {} ) => {
         buyPrice = 0,
         currPrice = 0,
         shareWorth = 0,
-        profitLoss = 0
+        profitLoss = 0,
     } = companyDetail;
     
     return {
@@ -16,7 +16,7 @@ const AddCompany = ( companyDetail = {} ) => {
             buyPrice,
             currPrice,
             shareWorth,
-            profitLoss
+            profitLoss,
         }
     }
 }

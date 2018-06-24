@@ -6,10 +6,18 @@ const as = require('as-type');
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
+import SellAction from '../Actions/SellAction';
+import DeleteCompany from '../Actions/DeleteCompany';
+
 class Table extends React.Component {
 
+  onSell(row) {
+    this.props.sellStocks(as.float(this.props.data[row].shareWorth));
+    this.props.deleteCompany(row)
+  }
+
   render() {
-    console.log(this.props.data)
+    // console.log(this.props.data)
     return (
       <div>
         <ReactTable
@@ -76,10 +84,10 @@ class Table extends React.Component {
                 },
                 {
                   Header: "Sell",
-                  Cell: row => (
-                    <button onClick={() => {console.log("job success")}} >Sell</button>
-                  )
-                }
+                  accessor: "index",
+                  Cell: (row) => (
+                    <button onClick={this.onSell.bind(this, row.index)} >Sell</button>)                
+                } 
               ]
             }
           ]}
@@ -89,6 +97,17 @@ class Table extends React.Component {
         <br />
       </div>
     );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sellStocks: (sellValue) => {
+      dispatch(SellAction(sellValue));
+    },
+    deleteCompany: (index) => {
+      dispatch(DeleteCompany(index));
+    }
   }
 }
 
@@ -103,9 +122,10 @@ const mapStatetoProps = (state) => {
   })
   
   return {
-    data: state.portfolio
+    data: state.portfolio,
+    money: state.money
   }
 }
 
 
-export default connect(mapStatetoProps)(Table);
+export default connect(mapStatetoProps, mapDispatchToProps)(Table);

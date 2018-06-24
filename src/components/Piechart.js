@@ -1,6 +1,7 @@
 import React from 'react';
 import {PieChart, Pie, Sector, Cell} from 'recharts';
 import { connect } from 'react-redux';
+const as = require('as-type');
 
 const colors = ['#D0ECE7', '#A2D9CE', '#7DCEA0', '#27AE60'];
 const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
@@ -98,7 +99,7 @@ const mapStateToProps = (state) => {
     })
     companyDetails.push({
       name: "Money",
-      value: state.money.money
+      value: as.float(state.money.money)
     })
     return {
         name : companyDetails

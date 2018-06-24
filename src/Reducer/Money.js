@@ -10,6 +10,11 @@ const Money = (state = money, action) => {
             return {
                 money: as.float(state.money).toFixed(2) - as.float(action.payload).toFixed(2)
             }
+
+        case "SELL":
+            return {
+                money: as.float(state.money).toFixed(2) + as.float(action.payload).toFixed(2)
+            }
             
         default:
             return state
