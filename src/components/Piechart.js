@@ -90,11 +90,15 @@ class CustomPieChart extends React.Component {
 
 const mapStateToProps = (state) => {
     let companyDetails = []
-    state.map((child) => {
+    state.portfolio.map((child) => {
         companyDetails.push({
             name: child.company,
             value: parseFloat(child.shareWorth)
         })
+    })
+    companyDetails.push({
+      name: "Money",
+      value: state.money.money
     })
     return {
         name : companyDetails

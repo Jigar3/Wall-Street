@@ -10,7 +10,11 @@
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build"
   },
+  "engines": {
+    "node": "8.11.3"
+  },
   "dependencies": {
+    "as-type": "^1.0.0",
     "axios": "^0.18.0",
     "babel-cli": "^6.24.1",
     "babel-core": "6.25.0",
@@ -19,17 +23,11 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "cheerio": "^1.0.0-rc.2",
-    "create-react-class": "^15.6.3",
     "css-loader": "0.28.4",
     "express": "^4.16.3",
     "firebase": "^5.0.4",
     "history": "^4.7.2",
-    "iex-api": "^0.0.3",
-    "indian-stock-exchange": "^1.2.1",
-    "isomorphic-fetch": "^2.2.1",
     "live-server": "^1.2.0",
-    "namor": "^1.0.1",
     "node-sass": "^4.9.0",
     "normalize.css": "7.0.0",
     "react": "16.0.0",
@@ -41,6 +39,7 @@
     "react-thunk": "^1.0.0",
     "recharts": "^1.0.0-beta.10",
     "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
     "validator": "8.0.0",
