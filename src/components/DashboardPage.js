@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 class DashboardPage extends React.Component {
   render() {
     return (
-      <div className="container">
-        <h2>{`Total money left is $${this.props.money.money}`}</h2>
+      <div>
+        <div>
+          <h2>{`Total money left is $${this.props.money.money}`}</h2>
+        </div>
         <Table />
       </div>
     );

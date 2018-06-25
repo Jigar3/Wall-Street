@@ -1,32 +1,22 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
 
-import Header from './components/Header';
-import store from './reduxStore/store'
-import AddCompany from './Actions/AddCompany';
-import BuyAction from './Actions/BuyAction';
+import Header from "./components/Header";
+import store from "./reduxStore/store";
+import AppRouter from "./router/Approuter";
 
-import './styles/styles.scss';
-import '../node_modules/normalize.css';
+import "./styles/styles.scss";
+import "../node_modules/normalize.css";
 
 const App = () => (
   <Provider store={store}>
-    <Header />
+    <div>
+      <Header />
+      <AppRouter />
+    </div>
   </Provider>
-)
+);
 
-// store.subscribe(() => {
-//   console.log(store.getState())
-// })
-
-// store.dispatch(AddCompany({
-//   company: "GOOG",
-//   quantity: 10,
-//   buyPrice: 100,
-//   currPrice: 100,
-//   shareWorth: 1000,
-//   profitLoss: 0
-// }))
-
-ReactDOM.render(<App/>, document.getElementById("app"))
+ReactDOM.render(<App />, document.getElementById("app"));

@@ -1,27 +1,33 @@
+* {
+  box-sizing: border-box;
+}
 html {
-    font-size: 62.5%
+  font-size: 62.5%;
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: $m-size;  
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button:disabled {
-    cursor: default;
+  cursor: default;
 }
 
 .selected {
-    color: Blue;
-    font-weight: bold;
+  color: Blue;
+  font-weight: bold;
 }
 
 .title {
-    text-align: center;
-    font-weight: 300;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 300;
+  background: #f4f4f4;
+  height: 80px;
+  padding-top: 10px;
 }
-
