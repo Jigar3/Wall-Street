@@ -59,24 +59,54 @@ class BuyPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleOnSubmit}>
-          <label>Symbol: </label>
-          <input type="text" name="symbol" placeholder="Symbol" required />
-          <br />
-          <br />
-          <label>Quantity: </label>
-          <input
-            type="number"
-            name="quantity"
-            placeholder="Quantity"
-            required
-          />
-          <br />
-          <br />
-          {this.state.error ? <p>You don't have enough money</p> : undefined}
-          <button>Submit</button>
-        </form>
+      <div className="custom-container container">
+        <div className="row">
+          <div className="col-lg-12">
+            {" "}
+            <form
+              onSubmit={this.handleOnSubmit}
+              className="form-group"
+              autoComplete="off"
+            >
+              <div className="form-group">
+                <label className="col-form-label col-form-label-lg">
+                  Symbol
+                </label>
+                <input
+                  type="text"
+                  style={{ height: "70px", fontSize: "24px" }}
+                  name="symbol"
+                  placeholder="Enter Ticker Symbol"
+                  className="form-control input-lg"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="col-form-label col-form-label-lg">
+                  Quantity
+                </label>
+                <input
+                  style={{ height: "70px", fontSize: "24px" }}
+                  type="number"
+                  name="quantity"
+                  placeholder="Enter Quantity"
+                  className="form-control input-lg"
+                  id="inputlg"
+                  required
+                />
+              </div>
+              {this.state.error ? (
+                <p>You don't have enough money</p>
+              ) : (
+                undefined
+              )}
+              <button className="btn btn-primary btn-lg btn-block">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

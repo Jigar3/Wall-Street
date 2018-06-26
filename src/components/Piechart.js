@@ -1,9 +1,16 @@
 import React from "react";
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import { connect } from "react-redux";
 const as = require("as-type");
 
-const colors = ["#D0ECE7", "#A2D9CE", "#7DCEA0", "#27AE60"];
+const colors = [
+  "#00B2EE",
+  "#33A1C9",
+  "#38B0DE",
+  "#0BB5FF",
+  "#00BFFF",
+  "#0BB5FF"
+];
 const data = [
   { name: "Group A", value: 400 },
   { name: "Group B", value: 300 },
@@ -111,7 +118,7 @@ class CustomPieChart extends React.Component {
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={this.props.name}
-          cx={900}
+          cx={950}
           cy={400}
           innerRadius={120}
           outerRadius={180}

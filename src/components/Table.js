@@ -8,6 +8,7 @@ import "react-table/react-table.css";
 
 import SellAction from "../Actions/SellAction";
 import DeleteCompany from "../Actions/DeleteCompany";
+import Refresh from "../Actions/Refresh";
 
 class Table extends React.Component {
   onSell(row) {
@@ -98,6 +99,13 @@ class Table extends React.Component {
           ]}
           defaultPageSize={10}
           className="-striped -highlight"
+          style={{
+            background: "#F0FFFF",
+            color: "black",
+            fontSize: "20px",
+            padding: "25px",
+            marginTop: "0"
+          }}
         />
         <br />
       </div>
@@ -112,6 +120,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteCompany: index => {
       dispatch(DeleteCompany(index));
+    },
+    refresh: () => {
+      dispatch(Refresh());
     }
   };
 };

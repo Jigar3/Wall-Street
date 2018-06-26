@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
 
+import Header from "../components/Header";
 import DashboardPage from "../components/DashboardPage";
 import BuyPage from "../components/BuyPage";
 import NotFoundPage from "../components/NotFoundPage";
@@ -10,17 +11,7 @@ import GraphPage from "../components/GraphPage";
 const Approuter = () => (
   <Router>
     <div>
-      <div>
-        <NavLink to="/" activeClassName="selected" exact>
-          Home
-        </NavLink>
-        <NavLink to="/buy" activeClassName="selected">
-          Buy
-        </NavLink>
-        <NavLink to="/graph" activeClassName="selected">
-          Graph
-        </NavLink>
-      </div>
+      <Header />
       <div>
         <Switch>
           <Route path="/" component={DashboardPage} exact />
