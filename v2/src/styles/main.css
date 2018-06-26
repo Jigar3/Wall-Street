@@ -1,0 +1,18 @@
+span {
+    display: block;
+    padding: 50px;
+    text-align: center;
+    margin: 100px;
+}
+
+button {
+    height: 50px;
+    width: 100px;
+    margin: 10px;
+    background: #ae1231;
+    opacity: 0.7;
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+}
