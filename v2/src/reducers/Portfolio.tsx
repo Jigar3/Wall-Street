@@ -1,3 +1,5 @@
+import update from 'react-addons-update';
+
 const portfolio = []
 
 interface Action {
@@ -12,6 +14,19 @@ export default (state = portfolio, action: Action) => {
 
         case "DELETE":
             return state.filter(item => state.indexOf(item) !== action.payload);
+        
+        case "REFRESH":
+            return state.map((item, index) => {
+                console.log("From reducer")
+                if(index !== action.payload.index) {
+                    return item;
+                }
+
+                return {
+                    ...item,
+                    ...action.payload.companyDetails
+                }
+            })
 
         default:
             return state;

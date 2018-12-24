@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
+    "react-addons-update": "^15.6.2",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",

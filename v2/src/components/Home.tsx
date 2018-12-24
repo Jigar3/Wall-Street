@@ -3,19 +3,40 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import SellButton from "./SellButton";
+import Refresh from "../actions/Refresh";
+import { getUpdate } from "../utils/utils";
 
 interface PassedProps {
     money: {
         money: number
     },
-    portfolio: any
+    portfolio: any,
+    refresh: any
 }
 
 class Home extends React.Component <PassedProps> {
 
-    // handleList = this.props.portfolio.forEach((e) => 
-    //     <p>{e.company}</p>
-    // );
+    state = {
+        symbol: ""
+    }
+
+    // componentDidMount() {
+        
+    update = () => {
+        this.props.portfolio.map((item, index) => {
+            getUpdate(item.company).then(data => {
+                let companyDetails = {
+                    ...item,
+                    currPrice: 19 //data.data.quote.latestPrice
+                };
+                console.log(companyDetails);
+                this.props.refresh({index, companyDetails});
+            });
+        })
+    }
+        
+    // }
+
 
     render() {
         return (
@@ -34,13 +55,15 @@ class Home extends React.Component <PassedProps> {
                     this.props.portfolio.map((e, index) => {
                         return (
                             <React.Fragment key={e.company}>
-                                <p> {index} | {e.company} | {e.quantity} | {e.shareWorth} | <SellButton index={index} sellValue={e.shareWorth}></SellButton> </p>
+                                {index} | {e.company} | {e.quantity} | {e.shareWorth} | {e.currPrice} | <SellButton index={index} sellValue={e.shareWorth}></SellButton> 
                             
                             </React.Fragment>
                         )
                         }
                     )
                 }
+
+                <button onClick={this.update} >Refresh</button>
 
             </div>
         )
@@ -54,5 +77,13 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDisptachToProps = (dispatch) => {
+    return {
+        refresh: ({index, companyDetails}) => {
+            dispatch(Refresh({index, companyDetails}));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDisptachToProps)(Home);
 
