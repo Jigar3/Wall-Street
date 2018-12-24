@@ -17,7 +17,6 @@ export default (state = portfolio, action: Action) => {
         
         case "REFRESH":
             return state.map((item, index) => {
-                console.log("From reducer")
                 if(index !== action.payload.index) {
                     return item;
                 }
