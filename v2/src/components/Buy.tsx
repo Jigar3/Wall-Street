@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 
 import { RoundOf } from "../utils/utils";
 import BuyAction from "../actions/Buy";
+// import AddCompanyAction from "../actions/Addcompany";
+import Addcompany from "../actions/Addcompany";
 
 interface State {
     symbol: string,
     quantity: number,
-    buyPrice: number
+    shareWorth: number,
+    loader: boolean
 }
 
 class Buy extends React.Component<any, State> {
@@ -16,22 +19,41 @@ class Buy extends React.Component<any, State> {
     state = {
         symbol: "",
         quantity: 0,
-        buyPrice: 0
+        shareWorth: 0,
+        loader: false
     }
 
     handleSubmit = e => {
         e.preventDefault();
+
+        this.setState({loader: true});
+
         axios
             .get(`https://api.iextrading.com/1.0/stock/${this.state.symbol}/batch?types=quote`)
             .then(data => {
-                this.setState({buyPrice: RoundOf(data.data.quote.latestPrice * this.state.quantity, 2)});
+                this.setState({shareWorth: RoundOf(data.data.quote.latestPrice * this.state.quantity, 2)});
+                this.setState({loader: false});
 
-                this.props.subtractFromMoney(this.state.buyPrice);
+                const companyDetails = {
+                    company: this.state.symbol[0],
+                    quantity: this.state.quantity[0],
+                    shareWorth: this.state.shareWorth,
+                    currPrice: data.data.quote.latestPrice,
+                    buyPrice: data.data.quote.latestPrice,
+                    profitLoss: 0
+                }
+
+                // console.log("company", companyDetails)
+
+                this.props.subtractFromMoney(this.state.shareWorth);
+                this.props.addCompany(companyDetails);
 
                 this.setState({
                     symbol: "",
                     quantity: 0
                 })
+
+                this.props.history.push("/");
             })
     }
 
@@ -41,9 +63,9 @@ class Buy extends React.Component<any, State> {
         } as Pick<State, 'symbol' | 'quantity'> )
     }
 
-    showBuyPrice = () => {
-        if(this.state.buyPrice != 0) {
-            return <p>{this.state.buyPrice}</p>
+    showshareWorth = () => {
+        if(this.state.shareWorth != 0) {
+            return <p>{this.state.shareWorth}</p>
         } else {
             return null;
         }
@@ -62,10 +84,12 @@ class Buy extends React.Component<any, State> {
                     <button>Submit</button>
                 </form>
 
-                {this.showBuyPrice()}
+                {this.showshareWorth()}
                 <p>
-                    Money : {this.props.money.money}
+                    Money : {this.props.money.money} <br/>
                 </p>
+
+                {this.state.loader ? <p>Waiting......</p> : undefined }
             </div>
         )
     };
@@ -81,6 +105,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         subtractFromMoney: buyValue => {
             dispatch(BuyAction(buyValue));
+        },
+        addCompany: companyDetails => {
+            dispatch(Addcompany(companyDetails))
         }
     }
 }
