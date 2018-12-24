@@ -27,7 +27,7 @@ class Home extends React.Component <PassedProps> {
             getUpdate(item.company).then(data => {
                 let companyDetails = {
                     ...item,
-                    currPrice: 19 //data.data.quote.latestPrice
+                    currPrice: data.data.quote.latestPrice
                 };
                 console.log(companyDetails);
                 this.props.refresh({index, companyDetails});
