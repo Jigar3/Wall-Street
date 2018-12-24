@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+import SellButton from "./SellButton";
+
 interface PassedProps {
     money: {
         money: number
@@ -26,8 +28,14 @@ class Home extends React.Component <PassedProps> {
                 <h2>Portfolio</h2>
                 
                 {
-                    this.props.portfolio.map(e => 
-                        <p key={e.company}> {e.company} | {e.quantity} | {e.shareWorth} </p>
+                    this.props.portfolio.map((e, index) => {
+                        return (
+                            <React.Fragment key={e.company}>
+                                <p> {index} | {e.company} | {e.quantity} | {e.shareWorth} | <SellButton index={index} sellValue={e.shareWorth}></SellButton> </p>
+                            
+                            </React.Fragment>
+                        )
+                        }
                     )
                 }
 
