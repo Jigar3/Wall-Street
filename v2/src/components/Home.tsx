@@ -23,6 +23,9 @@ class Home extends React.Component <PassedProps> {
                 <NavLink to="/buy">
                     Buy
                 </NavLink>
+                <NavLink to="/view">
+                    View
+                </NavLink>
                 <h2>Total Money Left with you: </h2>
                 <p>{this.props.money.money}</p>
                 <h2>Portfolio</h2>
