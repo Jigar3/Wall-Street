@@ -10,13 +10,14 @@ class View extends React.Component {
         quote: null
     }
 
-    handleSubmit = () => {
-        axios.
+    handleSubmit = (e) => {
+        if(e.key === 'Enter') {
+            axios.
             get(`https://api.iextrading.com/1.0/stock/${this.state.symbol}/batch?types=quote`).
             then(data => {
-                this.setState({quote: data.data.quote});
+                this.setState({quote: data.data.quote, symbol: ""});
             })
-
+        }
     }
 
     handleOnChange = (e) => {
@@ -30,6 +31,9 @@ class View extends React.Component {
                     type="text" 
                     name="symbol"
                     onChange={this.handleOnChange}
+                    onKeyPress={this.handleSubmit}
+                    autoComplete={"off"}
+                    value={this.state.symbol}
                 />
                 <button onClick={this.handleSubmit}>Ok</button>
 
