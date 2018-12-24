@@ -24,8 +24,6 @@ class Home extends React.Component <PassedProps> {
                 <h2>Total Money Left with you: </h2>
                 <p>{this.props.money.money}</p>
                 <h2>Portfolio</h2>
-
-                { console.log( this.props.portfolio)}
                 
                 {
                     this.props.portfolio.map(e => 
