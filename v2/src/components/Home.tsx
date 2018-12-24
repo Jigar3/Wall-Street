@@ -21,14 +21,14 @@ class Home extends React.Component <PassedProps> {
 
     state = {
         symbol: "",
-        assetValue: ""
+        assetValue: this.props.money.money
     }
 
         
     update = () => {
         this.props.portfolio.map((item, index) => {
             getUpdate(item.company).then(data => {
-                // data.data.quote.latestPrice = 12
+                data.data.quote.latestPrice = 12
                 let companyDetails = {
                     ...item,
                     currPrice: data.data.quote.latestPrice,
@@ -36,8 +36,12 @@ class Home extends React.Component <PassedProps> {
                     shareWorth: RoundOf(item.quantity * data.data.quote.latestPrice, 2)
                 };
                 this.props.refresh({index, companyDetails});
-                // const value = RoundOf((data.data.quote.latestPrice - item.buyPrice) * item.quantity, 2)
-                // this.props.addToMoney(value);
+                let assets = 0;
+                this.props.portfolio.map(item => {
+                    assets = assets + item.shareWorth;
+                })
+                assets = assets + this.props.money.money;
+                this.setState({assetValue: assets})
             });
         })
     }
@@ -54,6 +58,8 @@ class Home extends React.Component <PassedProps> {
                 </NavLink>
                 <h2>Total Money Left with you: </h2>
                 <p>{this.props.money.money}</p>
+                <h2>Total Assets: </h2>
+                <p>{this.state.assetValue}</p>
                 <h2>Portfolio</h2>
                 
                 {
