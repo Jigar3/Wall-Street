@@ -74,6 +74,11 @@ class Home extends React.Component <PassedProps> {
 						<NavLink to="/assets">
 								Assets
 						</NavLink>
+
+						<br/>
+
+						<a href="http://www.isnasdaqopen.com/" target="_blank">Check If Nasdaq is open</a>
+
 						<h2>Total Money Left with you: </h2>
 						<p>{this.props.money.money}</p>
 						<h2>Portfolio</h2>
