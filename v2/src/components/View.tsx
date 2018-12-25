@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { getUpdate } from "../utils/utils";
 
 const _ = require("lodash");
 
@@ -10,14 +11,22 @@ class View extends React.Component {
         quote: null
     }
 
-    handleSubmit = (e) => {
-        if(e.key === 'Enter') {
-            axios.
+    getData = () => {
+        axios.
             get(`https://api.iextrading.com/1.0/stock/${this.state.symbol}/batch?types=quote`).
             then(data => {
                 this.setState({quote: data.data.quote, symbol: ""});
             })
+    }
+
+    handleEnterPress = (e) => {
+        if(e.key === 'Enter') {
+            this.getData();
         }
+    }
+
+    handleClick = () => {
+        this.getData();
     }
 
     handleOnChange = (e) => {
@@ -31,11 +40,11 @@ class View extends React.Component {
                     type="text" 
                     name="symbol"
                     onChange={this.handleOnChange}
-                    onKeyPress={this.handleSubmit}
+                    onKeyPress={this.handleEnterPress}
                     autoComplete={"off"}
                     value={this.state.symbol}
                 />
-                <button onClick={this.handleSubmit}>Ok</button>
+                <button onClick={this.handleClick}>Ok</button>
 
                 <br/>
 

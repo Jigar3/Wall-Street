@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { RoundOf } from "../utils/utils"
+
 interface PassedProps {
     money: {
         money: number
@@ -23,7 +25,7 @@ class Asset extends React.Component<PassedProps> {
         })
 
         // this.setState({assetValue: assets})
-        return assets;
+        return RoundOf(assets, 2);
     }
 
     render() {
