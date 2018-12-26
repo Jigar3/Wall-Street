@@ -1,18 +1,25 @@
-span {
-    display: block;
-    padding: 50px;
-    text-align: center;
-    margin: 100px;
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-button {
-    height: 50px;
-    width: 100px;
-    margin: 10px;
-    background: #ae1231;
-    opacity: 0.7;
-    color: white;
-    border: none;
-    cursor: pointer;
-    
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#profit {
+    color: green;
+}
+
+#loss {
+    color: red;
+}
+
+#nav {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
 }

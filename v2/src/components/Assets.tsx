@@ -31,9 +31,9 @@ class Asset extends React.Component<PassedProps> {
     render() {
         return (
             <div>
-                <NavLink to="/">
+                {/* <NavLink to="/">
                     Home
-                </NavLink>
+                </NavLink> */}
 
                 <p>Money: {this.state.money}</p>
                 <p>Total Assets: {this.calcAsset()}</p>
