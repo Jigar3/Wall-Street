@@ -30,7 +30,7 @@ class Buy extends React.Component<any, State> {
         e.preventDefault();
 
         this.setState({loader: true});
-        if(this.state.quantity < 0 || this.state.quantity % 1 !== 0) {
+        if(this.state.quantity <= 0 || this.state.quantity % 1 !== 0) {
             this.setState({error: "Please enter a Positive Integer as quantity", loader: false, symbol: "", quantity: 0})
             return -1;
         }
@@ -57,6 +57,7 @@ class Buy extends React.Component<any, State> {
                         company: this.state.symbol[0],
                         quantity: this.state.quantity[0],
                         shareWorth: this.state.shareWorth,
+                        companyName: data.data.quote.companyName,
                         currPrice: data.data.quote.latestPrice,
                         buyPrice: data.data.quote.latestPrice,
                         profitLoss: 0
