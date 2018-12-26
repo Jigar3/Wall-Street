@@ -1,8 +1,8 @@
-export default ({index, companyDetails}) => {
+export default ({id, companyDetails}) => {
     return {
         type: "REFRESH",
         payload: {
-            index,
+            id,
             companyDetails
         }
     };

@@ -38,6 +38,7 @@ class Home extends React.Component <PassedProps> {
 
 	update = () => {
 		this.props.portfolio.map((item, index) => {
+			const id = item.id
 			getUpdate(item.company).then(data => {
 				let companyDetails = {
 						...item,
@@ -45,7 +46,7 @@ class Home extends React.Component <PassedProps> {
 						profitLoss: RoundOf((data.data.quote.latestPrice - item.buyPrice) * item.quantity, 2),
 						shareWorth: RoundOf(item.quantity * data.data.quote.latestPrice, 2)
 				};
-				this.props.refresh({index, companyDetails});
+				this.props.refresh({id, companyDetails});
 			});
 		}
 	)}
@@ -71,33 +72,36 @@ class Home extends React.Component <PassedProps> {
 				<h2>Portfolio</h2>
 				
 				<table>
-					<tr>
-						<th>Index</th>
-						<th>Company</th>
-						<th>Quantity</th>
-						<th>BuyPrice</th>
-						<th>CurrentPrice</th>
-						<th>ShareWorth</th>
-						<th>ProfitLoss</th>
-						<th>Sell Button</th>
-					</tr>
-					{
-					this.props.portfolio.map((e, index) => {
-						return (
-							<tr key={e.company}>
-								<td>{index}</td>
-								<td>{e.company}</td>
-								<td>{e.quantity}</td>
-								<td>{e.buyPrice}</td>
-								<td>{e.currPrice}</td>
-								<td>{e.shareWorth}</td>
-								<td>{e.profitLoss >= 0 ? <span id="profit">{e.profitLoss}</span> : <span id="loss">{e.profitLoss}</span>}</td>
-								<td><SellButton index={index} sellValue={e.shareWorth}></SellButton></td>
-							</tr>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Company</th>
+							<th>Quantity</th>
+							<th>BuyPrice</th>
+							<th>CurrentPrice</th>
+							<th>ShareWorth</th>
+							<th>ProfitLoss</th>
+							<th>Sell Button</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+						this.props.portfolio.map((e, index) => {
+							return (
+								<tr key={e.id}>
+									<td>{e.id}</td>
+									<td>{e.company}</td>
+									<td>{e.quantity}</td>
+									<td>{e.buyPrice}</td>
+									<td>{e.currPrice}</td>
+									<td>{e.shareWorth}</td>
+									<td>{e.profitLoss >= 0 ? <span id="profit">{e.profitLoss}</span> : <span id="loss">{e.profitLoss}</span>}</td>
+									<td><SellButton id={e.id} sellValue={e.shareWorth}></SellButton></td>
+								</tr>
+								)}
 							)
 						}
-					)
-				}
+					</tbody>
 				</table>
 
 			</div>
@@ -114,8 +118,8 @@ const mapStateToProps = state => {
 
 const mapDisptachToProps = (dispatch) => {
 	return {
-			refresh: ({index, companyDetails}) => {
-					dispatch(Refresh({index, companyDetails}));
+			refresh: ({id, companyDetails}) => {
+					dispatch(Refresh({id, companyDetails}));
 			},
 			addToMoney: (value) => {
 					dispatch(SellAction(value));

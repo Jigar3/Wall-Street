@@ -1,6 +1,6 @@
-export default (index) => {
+export default (id) => {
     return {
         type: "DELETE",
-        payload: index,
+        payload: id,
     }
 }

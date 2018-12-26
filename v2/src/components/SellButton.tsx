@@ -5,7 +5,7 @@ import DeleteCompany from "../actions/DeleteCompany";
 import SellAction from "../actions/Sell";
 
 interface PassedProps {
-    index: number,
+    id: string,
     sellValue: number,
     deleteCompany: any,
     addToMoney: any
@@ -13,15 +13,15 @@ interface PassedProps {
 
 class SellButton extends React.Component<PassedProps, any> {
 
-    handleSubmit = (index, sellValue) => {
-        this.props.deleteCompany(index);
+    handleSubmit = (id, sellValue) => {
+        this.props.deleteCompany(id);
         this.props.addToMoney(sellValue)
     }
 
     render() {
         return (
             <div>
-                <button onClick={() => this.handleSubmit(this.props.index, this.props.sellValue)} >SELL</button>
+                <button onClick={() => this.handleSubmit(this.props.id, this.props.sellValue)} >SELL</button>
             </div>
         )
     }
@@ -29,8 +29,8 @@ class SellButton extends React.Component<PassedProps, any> {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteCompany: index => {
-            dispatch(DeleteCompany(index));
+        deleteCompany: id => {
+            dispatch(DeleteCompany(id));
         },
         addToMoney: sellValue => {
             dispatch(SellAction(sellValue));

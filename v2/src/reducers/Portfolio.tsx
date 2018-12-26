@@ -13,11 +13,11 @@ export default (state = portfolio, action: Action) => {
             return state.concat(action.payload);
 
         case "DELETE":
-            return state.filter(item => state.indexOf(item) !== action.payload);
+            return state.filter(item => item.id !== action.payload);
         
         case "REFRESH":
-            return state.map((item, index) => {
-                if(index !== action.payload.index) {
+            return state.map((item) => {
+                if(item.id !== action.payload.id) {
                     return item;
                 }
 

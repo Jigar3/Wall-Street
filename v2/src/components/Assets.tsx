@@ -13,18 +13,12 @@ interface PassedProps {
 
 class Asset extends React.Component<PassedProps> {
 
-    state = {
-        money: this.props.money.money,
-        // assetValue: 0
-    }
-
     calcAsset = () => {
         let assets = 0;
         this.props.portfolio.map(item => {
             assets = assets + item.shareWorth;
         })
-
-        // this.setState({assetValue: assets})
+        
         return RoundOf(assets, 2);
     }
 
@@ -35,9 +29,9 @@ class Asset extends React.Component<PassedProps> {
                     Home
                 </NavLink> */}
 
-                <p>Money: {this.state.money}</p>
+                <p>Money: {this.props.money.money}</p>
                 <p>Total Assets: {this.calcAsset()}</p>
-                <p> Total Value: {RoundOf(this.state.money + this.calcAsset(), 2)} </p>
+                <p> Total Value: {RoundOf(this.props.money.money + this.calcAsset(), 2)} </p>
             </div>
         )
     };
