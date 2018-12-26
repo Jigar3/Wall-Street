@@ -37,7 +37,7 @@ class Asset extends React.Component<PassedProps> {
 
                 <p>Money: {this.state.money}</p>
                 <p>Total Assets: {this.calcAsset()}</p>
-                <p> Total Value: {this.state.money + this.calcAsset()} </p>
+                <p> Total Value: {RoundOf(this.state.money + this.calcAsset(), 2)} </p>
             </div>
         )
     };

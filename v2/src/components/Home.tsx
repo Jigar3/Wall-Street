@@ -53,7 +53,7 @@ class Home extends React.Component <PassedProps> {
 					let companyDetails = {
 							...item,
 							currPrice: data.data.quote.latestPrice,
-							profitLoss: RoundOf(data.data.quote.latestPrice - item.buyPrice, 2),
+							profitLoss: RoundOf((data.data.quote.latestPrice - item.buyPrice) * item.quantity, 2),
 							shareWorth: RoundOf(item.quantity * data.data.quote.latestPrice, 2)
 					};
 					this.props.refresh({index, companyDetails});

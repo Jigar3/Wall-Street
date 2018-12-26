@@ -30,6 +30,10 @@ class Buy extends React.Component<any, State> {
         e.preventDefault();
 
         this.setState({loader: true});
+        if(this.state.quantity < 0 || this.state.quantity % 1 !== 0) {
+            this.setState({error: "Please enter a Positive Integer as quantity", loader: false, symbol: "", quantity: 0})
+            return -1;
+        }
 
         axios
             .get(`https://api.iextrading.com/1.0/stock/${this.state.symbol}/batch?types=quote`)
