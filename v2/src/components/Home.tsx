@@ -74,7 +74,6 @@ class Home extends React.Component <PassedProps> {
 				<table>
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>Company</th>
 							<th>Quantity</th>
 							<th>BuyPrice</th>
@@ -89,7 +88,6 @@ class Home extends React.Component <PassedProps> {
 						this.props.portfolio.map((e, index) => {
 							return (
 								<tr key={e.id}>
-									<td>{e.id}</td>
 									<td>{e.company}</td>
 									<td>{e.quantity}</td>
 									<td>{e.buyPrice}</td>
