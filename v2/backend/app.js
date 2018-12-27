@@ -1,5 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const cors = require("cors")
 const state = require("./routes")
 
 const app = express()
@@ -7,6 +8,8 @@ const app = express()
 // Body Parser Middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(cors())
 
 app.use("/state", state)
 

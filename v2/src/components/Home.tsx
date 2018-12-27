@@ -10,6 +10,7 @@ import SellAction from "../actions/Sell";
 import BuyAction from "../actions/Buy";
 
 import "../styles/main.css"
+import axios from "axios";
 
 interface PassedProps {
 	money: {
@@ -30,6 +31,12 @@ class Home extends React.Component <PassedProps> {
 	componentDidMount() {
 		let interval = setInterval(this.update, 2000);
 		this.setState({intervalId: interval});
+	}
+
+	componentDidUpdate() {
+		this.props.portfolio.map(item => {
+			axios.patch("http://localhost:3001/state/company", item)
+		})
 	}
 
 	componentWillUnmount() {

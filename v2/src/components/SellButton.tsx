@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import DeleteCompany from "../actions/DeleteCompany";
 import SellAction from "../actions/Sell";
+import axios from "axios";
 
 interface PassedProps {
     id: string,
@@ -15,6 +16,7 @@ class SellButton extends React.Component<PassedProps, any> {
 
     handleSubmit = (id, sellValue) => {
         this.props.deleteCompany(id);
+        axios.delete("http://localhost:3001/state/company", {data: {id}})
         this.props.addToMoney(sellValue)
     }
 

@@ -13,7 +13,7 @@ interface CompanyDetail {
 
 export default (companyDetail: CompanyDetail) => {
     const {
-        id = uuidv4(),
+        id = '',
         company = '',
         companyName = '',
         quantity = 0,

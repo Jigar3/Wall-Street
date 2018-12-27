@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import uuidv4 from "uuid/v4"
 
 import { RoundOf } from "../utils/utils";
 import BuyAction from "../actions/Buy";
@@ -54,6 +55,7 @@ class Buy extends React.Component<any, State> {
                     this.setState({loader: false});
 
                     const companyDetails = {
+                        id: uuidv4(),
                         company: this.state.symbol[0],
                         quantity: this.state.quantity[0],
                         shareWorth: this.state.shareWorth,
@@ -65,6 +67,8 @@ class Buy extends React.Component<any, State> {
 
                     this.props.subtractFromMoney(this.state.shareWorth);
                     this.props.addCompany(companyDetails);
+                    // console.log(companyDetails)
+                    axios.post("http://localhost:3001/state/company", companyDetails)
 
                     this.setState({
                         symbol: "",

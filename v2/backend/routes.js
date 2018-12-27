@@ -29,6 +29,9 @@ router.patch("/money", (req, res) => {
             res.send(err)
         } 
         else {
+            if(money == null) {
+                return res.send("Error occured")
+            }
             money.set(updatedValue)
             money.save().then(data => {
                     res.send(data)
@@ -75,6 +78,9 @@ router.patch("/company", (req, res) => {
         if(err) {
             res.send(err)
         } else {
+            if(company == null) {
+                return res.send("some error occured")
+            }
             company.set(updatedValue)
             company.save().then(data => {
                     res.send(data)
