@@ -43,8 +43,7 @@ router.patch("/money", (req, res) => {
 })
 
 router.delete("/money", (req, res) => {
-    Money.findById(req.body.id)
-        .remove()
+    Money.deleteOne({id: req.body.id})
         .then(data => {
         res.send(data);
         console.log(data);
@@ -92,7 +91,7 @@ router.patch("/company", (req, res) => {
 })
 
 router.delete("/company", (req, res) => {
-    Portfolio.find({"id": req.body.id}).remove()
+    Portfolio.deleteOne({"id": req.body.id})
         .then(data => {
             res.send(data)
         }).catch(err => {

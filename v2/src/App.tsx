@@ -13,17 +13,29 @@ const App = () => (
   </Provider>
 );
 
+let id;
+
 axios.get("http://localhost:3001/state/company").then(data => {
-  console.log(data.data)
   data.data.map(item => {
     store.dispatch(AddCompany(item))
   })
 })
 
 axios.get("http://localhost:3001/state/money").then(data => {
-  console.log(data.data)
-    store.dispatch(Set(data.data[0].money)) 
+    if(data.data.length == 0) {
+      axios.post("http://localhost:3001/state/money", {money: 10000}).then(data => {
+        id = data.data._id
+      })
+    } else {
+      store.dispatch(Set(data.data[0].money))
+      id = data.data[0]._id
+    }
 })
 
 
-export default App;
+
+export {
+  App as default,
+  id
+}
+

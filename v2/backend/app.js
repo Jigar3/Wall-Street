@@ -18,5 +18,5 @@ app.get("/", (req, res) => {
 })
 
 app.listen(3001, () => {
-    console.log("Started the backend server")
+    console.log("Started the backend server at port 3001")
 })
