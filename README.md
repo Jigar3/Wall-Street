@@ -12,4 +12,17 @@ yarn install
 yarn start
 ```
 
+The above command will start the frontend
+
+To start the backend
+```
+cd v2/backend
+yarn install
+yarn start
+```
+
+The App uses a Mongo database so you will need to start a mongo service first on your local machine or if you don't want local mongo instance you can use mLab. Replace your mLabURI with the local one in model.js and put your username and password in a .env file. Sample env file is given.
+
+Enjoy!!
+
 Its still a WIP.
