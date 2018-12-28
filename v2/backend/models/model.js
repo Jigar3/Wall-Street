@@ -1,15 +1,5 @@
-const mongoose = require("mongoose")
+const {mongoose} = require("./mongoose-setup")
 require('dotenv').config()
-
-// Local Database
-const url = "mongodb://localhost:27017/wall-street"
-
-// Mlab Database
-// const url = `mongodb://${process.env.USERNAME}:${process.env.PASSWORD}@ds225308.mlab.com:25308/wall-street`
-
-mongoose.connect(url, { useNewUrlParser: true }).then(() => {
-    console.log("Connected to DB")
-})
 
 const Schema = mongoose.Schema
 
@@ -18,6 +8,10 @@ const moneySchema = new Schema({
         type: Number,
         required: true,
         default: 10000
+    },
+    _creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 })
 
@@ -29,7 +23,8 @@ const companySchema = new Schema({
     buyPrice: { type: Number, required: true },
     currPrice: { type: Number, required: true },
     shareWorth: { type: Number, required: true },
-    profitLoss: { type: Number, required: true }
+    profitLoss: { type: Number, required: true },
+    _creator: { type: mongoose.Schema.Types.ObjectId, required: true }
 })
 
 module.exports = {

@@ -72,6 +72,9 @@ class Home extends React.Component <PassedProps> {
 					<NavLink to="/buy">Buy</NavLink>
 					<NavLink to="/view">View</NavLink>
 					<NavLink to="/assets">Assets</NavLink>
+					<NavLink to="/signup">Sign Up</NavLink>
+					<NavLink to="/login">Log In</NavLink>
+					<NavLink to="/logout">Log Out</NavLink>
 				</div>
 
 				<br/>
