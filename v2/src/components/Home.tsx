@@ -33,10 +33,12 @@ class Home extends React.Component <PassedProps> {
 		this.setState({intervalId: interval});
 	}
 
-	componentDidUpdate() {
-		this.props.portfolio.map(item => {
-			axios.patch("http://localhost:3001/state/company", item)
-		})
+	componentDidUpdate(prevProps) {
+		if(this.props.portfolio.length !== prevProps.portfolio.length) {
+			this.props.portfolio.map(item => {
+				axios.patch("http://localhost:3001/state/company", item)
+			})
+		}
 	}
 
 	componentWillUnmount() {
