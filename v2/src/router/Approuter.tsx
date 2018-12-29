@@ -1,24 +1,27 @@
 import React from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
+import PublicRoute from "./PublicRouter"
+import PrivateRoute from "./PrivateRouter"
+
 import Home from "../components/Home"
 import Buy from "../components/Buy"
 import View from "../components/View"
 import Assets from "../components/Assets"
 import Signup from "../components/Signup"
-import Signin from "../components/Signin"
+import LogIn from "../components/LogIn"
 import LogOut from "../components/LogOut"
 
 export default () => (
     <Router>
         <Switch>
-            <Route path="/" component={Home} exact/>
-            <Route path="/buy" component={Buy} exact/>
-            <Route path="/view" component={View} exact/>
-            <Route path="/assets" component={Assets} exact/>
-            <Route path="/signup" component={Signup} exact/>
-            <Route path="/login" component={Signin} exact/>
-            <Route path="/logout" component={LogOut} exact/>
+            <PrivateRoute path="/" component={Home} exact/>
+            <PrivateRoute path="/buy" component={Buy} exact/>
+            <PrivateRoute path="/view" component={View} exact/>
+            <PrivateRoute path="/assets" component={Assets} exact/>
+            <PublicRoute path="/signup" component={Signup} exact/>
+            <PublicRoute path="/login" component={LogIn} exact/>
+            <PrivateRoute path="/logout" component={LogOut} exact/>
         </Switch>
     </Router>
 );

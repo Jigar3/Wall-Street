@@ -13,29 +13,26 @@ const App = () => (
   </Provider>
 );
 
-let id;
-
-axios.get("http://localhost:3001/state/company").then(data => {
+if(localStorage.getItem("User_ID") !== null) {
+  axios.get("http://localhost:3001/state/company", {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
   data.data.map(item => {
     store.dispatch(AddCompany(item))
   })
 })
 
-axios.get("http://localhost:3001/state/money").then(data => {
+axios.get("http://localhost:3001/state/money", {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
     if(data.data.length == 0) {
-      axios.post("http://localhost:3001/state/money", {money: 10000}).then(data => {
-        id = data.data._id
+      axios.post("http://localhost:3001/state/money", {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
       })
     } else {
       store.dispatch(Set(data.data[0].money))
-      id = data.data[0]._id
     }
 })
+}
 
 
 
 export {
-  App as default,
-  id
+  App as default
 }
 

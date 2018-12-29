@@ -83,7 +83,7 @@ router.patch("/company", authenticate, (req, res) => {
 })
 
 router.delete("/company", authenticate, (req, res) => {
-    Portfolio.deleteOne({"_creator": req.user._id})
+    Portfolio.deleteOne({"id": req.body.id})
         .then(data => {
             res.send(data)
         }).catch(err => {

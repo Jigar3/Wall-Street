@@ -6,7 +6,7 @@ interface State {
     password: String
 }
 
-class Signin extends React.Component<any, State> {
+class LogIn extends React.Component<any, State> {
 
     state = {
         email: "",
@@ -24,6 +24,7 @@ class Signin extends React.Component<any, State> {
 
         axios.post("http://localhost:3001/users/login", {email: this.state.email[0], password: this.state.password[0]}).then(data => {
             localStorage.setItem("JWT_Token", data.headers["x-auth"])
+            localStorage.setItem("User_ID", data.data._id)
             this.props.history.push("/")
         })
     }
@@ -45,4 +46,4 @@ class Signin extends React.Component<any, State> {
     }
 }
 
-export default Signin
+export default LogIn

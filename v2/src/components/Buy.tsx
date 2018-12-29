@@ -68,7 +68,7 @@ class Buy extends React.Component<any, State> {
                     this.props.subtractFromMoney(this.state.shareWorth);
                     this.props.addCompany(companyDetails);
                     // console.log(companyDetails)
-                    axios.post("http://localhost:3001/state/company", companyDetails)
+                    axios.post("http://localhost:3001/state/company", companyDetails, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
 
                     this.setState({
                         symbol: "",

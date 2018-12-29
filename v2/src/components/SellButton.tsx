@@ -16,7 +16,7 @@ class SellButton extends React.Component<PassedProps, any> {
 
     handleSubmit = (id, sellValue) => {
         this.props.deleteCompany(id);
-        axios.delete("http://localhost:3001/state/company", {data: {id}})
+        axios.delete("http://localhost:3001/state/company", {data: {id}, headers: {"x-auth": localStorage.getItem("JWT_Token")}})
         this.props.addToMoney(sellValue)
     }
 

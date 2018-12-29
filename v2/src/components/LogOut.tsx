@@ -8,7 +8,8 @@ export default class LogOut extends React.Component<any> {
             "x-auth": localStorage.getItem("JWT_Token")
         }}).then(() => {
             localStorage.removeItem("JWT_Token")
-            this.props.history.push("/signup")
+            localStorage.removeItem("User_ID")
+            this.props.history.push("/login")
         })
     }
 
