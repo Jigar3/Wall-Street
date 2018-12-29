@@ -7,7 +7,6 @@ const { User } = require("../models/user")
 
 router.post("/signup", (req, res) => {
     let body = _.pick(req.body, ["email", "password", "name"])
-    // console.log(body)
 
     let user = new User(body)
 
