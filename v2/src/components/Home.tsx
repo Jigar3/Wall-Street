@@ -28,14 +28,14 @@ class Home extends React.Component <PassedProps> {
 	}
 	
 	componentDidMount() {
-		let interval = setInterval(this.update, 60000);
+		let interval = setInterval(this.update, 2000);
 		this.setState({intervalId: interval});
 	}
 
 	componentDidUpdate(prevProps) {
 		if(JSON.stringify(this.props.portfolio) !== JSON.stringify(prevProps.portfolio)) {
 			this.props.portfolio.map(item => {
-				axios.patch("http://localhost:3001/state/company", item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
+				axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
 			})
 		}
 	}

@@ -1,6 +1,8 @@
 import React from "react"
 import axios from "axios";
 
+import { NavLink } from "react-router-dom"
+
 interface State {
     email: String,
     password: String
@@ -22,7 +24,7 @@ class LogIn extends React.Component<any, State> {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post("http://localhost:3001/users/login", {email: this.state.email[0], password: this.state.password[0]}).then(data => {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {email: this.state.email[0], password: this.state.password[0]}).then(data => {
             localStorage.setItem("JWT_Token", data.headers["x-auth"])
             localStorage.setItem("User_ID", data.data._id)
             window.location.href = "/"
@@ -32,6 +34,10 @@ class LogIn extends React.Component<any, State> {
     render() {
         return(
             <div>
+
+                <NavLink to="/signup">
+                    Sign Up
+                </NavLink>
                 <form onSubmit={this.handleSubmit}>
                     <label>Email</label>
                     <input type="email" name="email" onChange={this.handleChange} value={this.state.email} required/>

@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 
 import { RoundOf } from "../utils/utils"
 
@@ -25,10 +24,6 @@ class Asset extends React.Component<PassedProps> {
     render() {
         return (
             <div>
-                {/* <NavLink to="/">
-                    Home
-                </NavLink> */}
-
                 <p>Money: {this.props.money.money}</p>
                 <p>Total Assets: {this.calcAsset()}</p>
                 <p> Total Value: {RoundOf(this.props.money.money + this.calcAsset(), 2)} </p>

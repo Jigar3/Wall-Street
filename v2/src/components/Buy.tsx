@@ -37,7 +37,7 @@ class Buy extends React.Component<any, State> {
         }
 
         axios
-            .get(`https://api.iextrading.com/1.0/stock/${this.state.symbol}/batch?types=quote`)
+            .get(`${process.env.REACT_APP_API_URL}/${this.state.symbol}/batch?types=quote`)
             .then(data => {
 
                 const shareWorth = RoundOf(data.data.quote.latestPrice * this.state.quantity, 2);
@@ -66,7 +66,7 @@ class Buy extends React.Component<any, State> {
 
                     this.props.subtractFromMoney(this.state.shareWorth);
                     
-                    axios.post("http://localhost:3001/state/company", companyDetails, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then((data) => {
+                    axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/company`, companyDetails, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then((data) => {
                         this.props.addCompany(data.data);
                     })
 

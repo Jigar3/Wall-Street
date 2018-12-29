@@ -12,7 +12,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Mounted")
     this.handleOnce()
   }
 

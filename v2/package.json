@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-addons-update": "^15.6.2",
@@ -25,7 +26,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_BACKEND_URL=http://localhost:3001 REACT_APP_API_URL=https://api.iextrading.com/1.0/stock react-scripts start",
     "start:both": "concurrently  \"yarn start\" \"node backend/app.js\" ",
     "build": "react-scripts build",
     "test": "react-scripts test",

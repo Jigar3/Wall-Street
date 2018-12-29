@@ -34,7 +34,7 @@ class SellButton extends React.Component<PassedProps, State> {
     handleSubmit = (id, currValue, maxQuantity, buyPrice) => {
         if(this.state.quantity == maxQuantity) {
             this.props.deleteCompany(id);
-            axios.delete("http://localhost:3001/state/company", {data: {id}, headers: {"x-auth": localStorage.getItem("JWT_Token")}})
+            axios.delete(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {data: {id}, headers: {"x-auth": localStorage.getItem("JWT_Token")}})
             this.props.addToMoney(RoundOf(maxQuantity * currValue, 2))
             this.setState({quantity: 0})
         } else if(this.state.quantity < maxQuantity && this.state.quantity > 0) {
@@ -49,7 +49,7 @@ class SellButton extends React.Component<PassedProps, State> {
                     profitLoss
                 }
 
-            axios.patch("http://localhost:3001/state/company", {quantity: changedQuantity, shareWorth, profitLoss}, {
+            axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {quantity: changedQuantity, shareWorth, profitLoss}, {
                 headers: {"x-auth": localStorage.getItem("JWT_Token")}
             }).then(() => {
                 this.props.refresh({id, companyDetails})

@@ -1,4 +1,5 @@
 import axios from "axios";
+require("dotenv").config()
 
 import store from "../reduxStore/store";
 import AddCompany from "../actions/Addcompany"
@@ -9,18 +10,18 @@ const RoundOf = (num: number, roundTo: number): number=> {
 };
 
 const getUpdate = async (symbol: string) => {
-    return await axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote`)       
+    return await axios.get(`${process.env.REACT_APP_API_URL}/${symbol}/batch?types=quote`)       
 }
 
 const getInitialValue = () => {
     if(localStorage.getItem("User_ID")) {
-        axios.get("http://localhost:3001/state/company", {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
             data.data.map(item => {
                 store.dispatch(AddCompany(item))
             })
         })
 
-        axios.get("http://localhost:3001/state/money", {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
             store.dispatch(Set(data.data[0].money))
         })
     }
