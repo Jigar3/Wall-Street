@@ -55,7 +55,6 @@ class Buy extends React.Component<any, State> {
                     this.setState({loader: false});
 
                     const companyDetails = {
-                        id: uuidv4(),
                         company: this.state.symbol[0],
                         quantity: this.state.quantity[0],
                         shareWorth: this.state.shareWorth,
@@ -66,9 +65,10 @@ class Buy extends React.Component<any, State> {
                     }
 
                     this.props.subtractFromMoney(this.state.shareWorth);
-                    this.props.addCompany(companyDetails);
-                    // console.log(companyDetails)
-                    axios.post("http://localhost:3001/state/company", companyDetails, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
+                    
+                    axios.post("http://localhost:3001/state/company", companyDetails, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then((data) => {
+                        this.props.addCompany(data.data);
+                    })
 
                     this.setState({
                         symbol: "",

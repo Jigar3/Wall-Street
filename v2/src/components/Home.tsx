@@ -8,6 +8,7 @@ import Refresh from "../actions/Refresh";
 import { getUpdate, RoundOf } from "../utils/utils";
 import SellAction from "../actions/Sell";
 import BuyAction from "../actions/Buy";
+import { getInitialValue } from "../utils/utils"
 
 import "../styles/main.css"
 import axios from "axios";
@@ -26,8 +27,7 @@ class Home extends React.Component <PassedProps> {
 	state = {
 		intervalId: null
 	}
-
-			
+	
 	componentDidMount() {
 		let interval = setInterval(this.update, 2000);
 		this.setState({intervalId: interval});
@@ -47,7 +47,7 @@ class Home extends React.Component <PassedProps> {
 
 	update = () => {
 		this.props.portfolio.map((item, index) => {
-			const id = item.id
+			const id = item._id
 			getUpdate(item.company).then(data => {
 				let companyDetails = {
 						...item,
@@ -99,7 +99,7 @@ class Home extends React.Component <PassedProps> {
 						{
 						this.props.portfolio.map((e, index) => {
 							return (
-								<tr key={e.id}>
+								<tr key={e._id}>
 									<td>{e.companyName}</td>
 									<td>{e.quantity}</td>
 									<td>{e.buyPrice}</td>

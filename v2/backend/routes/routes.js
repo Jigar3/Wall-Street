@@ -21,6 +21,7 @@ router.post("/money", authenticate, (req, res) => {
     })
 
     money.save().then(data => {
+        // console.log("money created")
         res.send(data)
     }).catch(err => {
         res.send(err)
@@ -52,6 +53,7 @@ router.delete("/money", authenticate, (req, res) => {
 
 router.get("/company", authenticate, (req, res) => {
     Portfolio.find({_creator: req.user._id}).then(data => {
+        // console.log(data)
         res.send(data)
     }).catch(err => {
         res.send(err)
@@ -59,8 +61,10 @@ router.get("/company", authenticate, (req, res) => {
 })
 
 router.post("/company", authenticate, (req, res) => {
-    const company = _.pick(req.body, ["id", "company", "companyName", "quantity", "buyPrice", "currPrice", "shareWorth", "profitLoss"])
+    const company = _.pick(req.body, ["company", "companyName", "quantity", "buyPrice", "currPrice", "shareWorth", "profitLoss"])
     company["_creator"] = req.user._id
+
+    // console.log(company)
 
     Portfolio.create(company).then(data => {
         res.send(data)

@@ -19,7 +19,6 @@ const moneySchema = new Schema({
 })
 
 const companySchema = new Schema({
-    id: { type: String, required: true },
     companyName: { type: String, required: true },
     company: { type: String, required: true },
     quantity: { type: Number, required: true },

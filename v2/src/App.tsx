@@ -1,37 +1,36 @@
 import React from "react";
 import { Provider } from "react-redux";
-import axios from "axios"
 
 import store from "./reduxStore/store";
 import AppRouter from "./router/Approuter";
-import AddCompany from "./actions/Addcompany"
-import Set from "./actions/SetMoney"
+import { getInitialValue } from "./utils/utils"
 
-const App = () => (
-  <Provider store={store}>
-      <AppRouter />
-  </Provider>
-);
+class App extends React.Component {
 
-if(localStorage.getItem("User_ID") !== null) {
-  axios.get("http://localhost:3001/state/company", {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
-  data.data.map(item => {
-    store.dispatch(AddCompany(item))
-  })
-})
+  state = {
+    once: false
+  }
 
-axios.get("http://localhost:3001/state/money", {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
-    if(data.data.length == 0) {
-      axios.post("http://localhost:3001/state/money", {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
-      })
-    } else {
-      store.dispatch(Set(data.data[0].money))
+  componentDidMount() {
+    this.handleOnce()
+  }
+
+  handleOnce = () => {
+    if(!this.state.once) {
+      getInitialValue()
+      this.setState({once: true})
     }
-})
+  }
+
+  render() {
+    return (
+        <Provider store={store}>
+            <AppRouter />
+        </Provider>
+      )
+  }
 }
-
-
-
+  
 export {
   App as default
 }

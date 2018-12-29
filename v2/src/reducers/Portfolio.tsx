@@ -1,5 +1,3 @@
-import update from 'react-addons-update';
-
 const portfolio = []
 
 interface Action {
@@ -7,17 +5,21 @@ interface Action {
     payload: any
 }
 
-export default (state = portfolio, action: Action) => {
+export default (state: any = portfolio, action: Action) => {
     switch(action.type) {
         case "ADD":
-            return state.concat(action.payload);
+            console.log(!state.includes(action.payload))
+            if(!state.includes(action.payload)) {
+                return state.concat(action.payload);
+            }
+            return state
 
         case "DELETE":
             return state.filter(item => item.id !== action.payload);
         
         case "REFRESH":
             return state.map((item) => {
-                if(item.id !== action.payload.id) {
+                if(item._id !== action.payload.id) {
                     return item;
                 }
 

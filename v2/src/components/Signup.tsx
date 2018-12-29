@@ -23,9 +23,13 @@ class Signup extends React.Component<any, State> {
         e.preventDefault()
 
         axios.post("http://localhost:3001/users/signup", {email: this.state.email[0], password: this.state.password[0]}).then(data => {
+
             axios.post("http://localhost:3001/users/login", {email: this.state.email[0], password: this.state.password[0]}).then(data => {
                 localStorage.setItem("JWT_Token", data.headers["x-auth"])
                 localStorage.setItem("User_ID", data.data._id)
+
+                axios.post("http://localhost:3001/state/money", {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
+
                 this.props.history.push("/")
             })
         })

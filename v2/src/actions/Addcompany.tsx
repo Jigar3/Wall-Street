@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4'
 
 interface CompanyDetail {
-    id: string,
+    _id: string,
     companyName: string,
     company: string,
     quantity: number,
@@ -13,7 +13,7 @@ interface CompanyDetail {
 
 export default (companyDetail: CompanyDetail) => {
     const {
-        id = '',
+        _id = '',
         company = '',
         companyName = '',
         quantity = 0,
@@ -26,7 +26,7 @@ export default (companyDetail: CompanyDetail) => {
     return {
         type: "ADD",
         payload: {
-            id,
+            _id,
             company,
             companyName,
             quantity,
