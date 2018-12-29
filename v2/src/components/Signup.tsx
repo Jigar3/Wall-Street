@@ -6,7 +6,7 @@ interface State {
     password: String
 }
 
-class Signup extends React.Component<any, State> {
+class SignUp extends React.Component<any, State> {
 
     state = {
         email: "",
@@ -52,4 +52,4 @@ class Signup extends React.Component<any, State> {
     }
 }
 
-export default Signup
+export default SignUp

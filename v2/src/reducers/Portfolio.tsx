@@ -8,14 +8,13 @@ interface Action {
 export default (state: any = portfolio, action: Action) => {
     switch(action.type) {
         case "ADD":
-            console.log(!state.includes(action.payload))
             if(!state.includes(action.payload)) {
                 return state.concat(action.payload);
             }
             return state
 
         case "DELETE":
-            return state.filter(item => item.id !== action.payload);
+            return state.filter(item => item._id !== action.payload);
         
         case "REFRESH":
             return state.map((item) => {

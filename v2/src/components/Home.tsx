@@ -8,7 +8,6 @@ import Refresh from "../actions/Refresh";
 import { getUpdate, RoundOf } from "../utils/utils";
 import SellAction from "../actions/Sell";
 import BuyAction from "../actions/Buy";
-import { getInitialValue } from "../utils/utils"
 
 import "../styles/main.css"
 import axios from "axios";
@@ -29,12 +28,12 @@ class Home extends React.Component <PassedProps> {
 	}
 	
 	componentDidMount() {
-		let interval = setInterval(this.update, 2000);
+		let interval = setInterval(this.update, 60000);
 		this.setState({intervalId: interval});
 	}
 
 	componentDidUpdate(prevProps) {
-		if(this.props.portfolio.length !== prevProps.portfolio.length) {
+		if(JSON.stringify(this.props.portfolio) !== JSON.stringify(prevProps.portfolio)) {
 			this.props.portfolio.map(item => {
 				axios.patch("http://localhost:3001/state/company", item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
 			})
@@ -106,7 +105,7 @@ class Home extends React.Component <PassedProps> {
 									<td>{e.currPrice}</td>
 									<td>{e.shareWorth}</td>
 									<td>{e.profitLoss >= 0 ? <span id="profit">{e.profitLoss}</span> : <span id="loss">{e.profitLoss}</span>}</td>
-									<td><SellButton id={e.id} sellValue={e.shareWorth}></SellButton></td>
+									<td><SellButton id={e._id} allValue={e}></SellButton></td>
 								</tr>
 								)}
 							)

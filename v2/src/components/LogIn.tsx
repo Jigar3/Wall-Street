@@ -1,6 +1,5 @@
 import React from "react"
 import axios from "axios";
-import { getInitialValue } from "../utils/utils"
 
 interface State {
     email: String,
@@ -26,7 +25,7 @@ class LogIn extends React.Component<any, State> {
         axios.post("http://localhost:3001/users/login", {email: this.state.email[0], password: this.state.password[0]}).then(data => {
             localStorage.setItem("JWT_Token", data.headers["x-auth"])
             localStorage.setItem("User_ID", data.data._id)
-            this.props.history.push("/")
+            window.location.href = "/"
         })
     }
 
@@ -42,6 +41,8 @@ class LogIn extends React.Component<any, State> {
 
                     <button>Submit</button>
                 </form>
+
+                <p>Sign Up</p>
             </div>
         )
     }

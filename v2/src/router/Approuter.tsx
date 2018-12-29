@@ -8,7 +8,7 @@ import Home from "../components/Home"
 import Buy from "../components/Buy"
 import View from "../components/View"
 import Assets from "../components/Assets"
-import Signup from "../components/Signup"
+import SignUp from "../components/Signup"
 import LogIn from "../components/LogIn"
 import LogOut from "../components/LogOut"
 
@@ -19,7 +19,7 @@ export default () => (
             <PrivateRoute path="/buy" component={Buy} exact/>
             <PrivateRoute path="/view" component={View} exact/>
             <PrivateRoute path="/assets" component={Assets} exact/>
-            <PublicRoute path="/signup" component={Signup} exact/>
+            <PublicRoute path="/signup" component={SignUp} exact/>
             <PublicRoute path="/login" component={LogIn} exact/>
             <PrivateRoute path="/logout" component={LogOut} exact/>
         </Switch>
