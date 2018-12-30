@@ -1,6 +1,8 @@
 import React from "react"
 import axios from "axios";
 
+import { history } from "../router/Approuter";
+
 interface State {
     email: String,
     name: String,
@@ -32,7 +34,7 @@ class SignUp extends React.Component<any, State> {
 
                 axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
 
-                this.props.history.push("/")
+                history.push("/")
             })
         })
     }

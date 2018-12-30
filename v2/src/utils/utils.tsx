@@ -14,6 +14,7 @@ const getUpdate = async (symbol: string) => {
 }
 
 const getInitialValue = () => {
+    console.log("Got Initial Value")
     if(localStorage.getItem("User_ID")) {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
             data.data.map(item => {

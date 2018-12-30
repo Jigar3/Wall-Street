@@ -2,12 +2,12 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import uuidv4 from "uuid/v4"
 
 import { RoundOf } from "../utils/utils";
 import BuyAction from "../actions/Buy";
-// import AddCompanyAction from "../actions/Addcompany";
 import Addcompany from "../actions/Addcompany";
+
+import { history } from "../router/Approuter";
 
 interface State {
     symbol: string,
@@ -75,7 +75,7 @@ class Buy extends React.Component<any, State> {
                         quantity: 0
                     })
 
-                    this.props.history.push("/");
+                    history.push("/");
                     }
                 }
             )

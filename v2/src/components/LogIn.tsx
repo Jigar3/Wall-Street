@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios";
 
 import { NavLink } from "react-router-dom"
+import { history } from "../router/Approuter";
 
 interface State {
     email: String,
@@ -27,7 +28,7 @@ class LogIn extends React.Component<any, State> {
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {email: this.state.email[0], password: this.state.password[0]}).then(data => {
             localStorage.setItem("JWT_Token", data.headers["x-auth"])
             localStorage.setItem("User_ID", data.data._id)
-            window.location.href = "/"
+            history.push("/")
         })
     }
 

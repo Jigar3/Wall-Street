@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import { history } from "../router/Approuter";
+
 export default class LogOut extends React.Component<any> {
 
     handleClick = () => {
@@ -9,13 +11,13 @@ export default class LogOut extends React.Component<any> {
         }}).then(() => {
             localStorage.removeItem("JWT_Token")
             localStorage.removeItem("User_ID")
-            this.props.history.push("/login")
+            history.push("/login")
         })
     }
 
     render() {
         return (
-            <button onClick={this.handleClick}>
+            <button onClick={this.handleClick} className="button is-light">
                 Log Out
             </button>
         )

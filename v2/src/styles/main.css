@@ -1,13 +1,13 @@
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+.table th{
+    text-align: center 
 }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+.table td {
+    text-align: center
+}
+
+.table {
+    margin-top: 0.75rem;
 }
 
 #profit {
@@ -22,4 +22,8 @@ td, th {
     width: 50%;
     display: flex;
     justify-content: space-around;
+}
+
+.level {
+    padding: 1.75rem 0px;
 }

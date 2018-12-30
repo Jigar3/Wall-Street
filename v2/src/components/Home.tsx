@@ -8,6 +8,7 @@ import Refresh from "../actions/Refresh";
 import { getUpdate, RoundOf } from "../utils/utils";
 import SellAction from "../actions/Sell";
 import BuyAction from "../actions/Buy";
+import Header from "./Header"
 
 import "../styles/main.css"
 import axios from "axios";
@@ -28,14 +29,18 @@ class Home extends React.Component <PassedProps> {
 	}
 	
 	componentDidMount() {
-		let interval = setInterval(this.update, 2000);
+		let interval = setInterval(this.update, 60000);
 		this.setState({intervalId: interval});
 	}
 
 	componentDidUpdate(prevProps) {
+		// console.log("Props" , this.props.portfolio, prevProps.portfolio)
 		if(JSON.stringify(this.props.portfolio) !== JSON.stringify(prevProps.portfolio)) {
 			this.props.portfolio.map(item => {
-				axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
+				console.log(item)
+				axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(() => {
+					console.log("Patch from home")
+				})
 			})
 		}
 	}
@@ -63,11 +68,9 @@ class Home extends React.Component <PassedProps> {
 	render() {
 		return (
 			<div>
-				<a href="http://www.isnasdaqopen.com/" target="_blank">Check If Nasdaq is open</a>
-				<br/>
-				<br/>
+				<Header />
 				
-				<div id="nav">
+				{/* <div id="nav">
 					<NavLink to="/buy">Buy</NavLink>
 					<NavLink to="/view">View</NavLink>
 					<NavLink to="/assets">Assets</NavLink>
@@ -76,13 +79,18 @@ class Home extends React.Component <PassedProps> {
 					<NavLink to="/logout">Log Out</NavLink>
 				</div>
 
-				<br/>
+				<br/> */}
 
-				<h1>Total Money Left with you: $ {this.props.money.money}</h1>
 				<Asset />
-				<h2>Portfolio</h2>
+
+				<section className="hero is-primary is-bold">
+					<div className="hero-body">
+						<h1 className="title has-text-centered is-uppercase">Portfolio</h1>
+					</div>
+				</section>
+				{/* <h2 className="title has-text-centered">Portfolio</h2> */}
 				
-				<table>
+				<table className="table is-hoverable is-fullwidth">
 					<thead>
 						<tr>
 							<th>Company</th>

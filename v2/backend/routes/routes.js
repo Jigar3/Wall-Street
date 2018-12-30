@@ -63,6 +63,7 @@ router.post("/company", authenticate, (req, res) => {
     company["_creator"] = req.user._id
 
     Portfolio.create(company).then(data => {
+        console.log("company created", data.company)
         res.send(data)
     }).catch(err => {
         res.send(err)
@@ -70,12 +71,13 @@ router.post("/company", authenticate, (req, res) => {
 })
 
 router.patch("/company", authenticate, (req, res) => {
-    const updatedValue = _.pick(req.body, ["company", "companyName", "quantity", "buyPrice", "currPrice", "shareWorth", "profitLoss"])
+    const updatedValue = _.pick(req.body, ["company", "companyName", "quantity", "buyPrice", "currPrice", "shareWorth", "profitLoss", "_id"])
     
-    Portfolio.findOneAndUpdate({"_creator": req.user._id}, {$set: updatedValue}, {new: true}).then(data => {
+    Portfolio.findOneAndUpdate({"_creator": req.user._id, "_id": updatedValue._id}, {$set: updatedValue}, {new: true}).then(data => {
         if(data == null) {
             return res.status(404).send()
         }
+        console.log("Updated", data)
         res.send(data)
     }).catch(err => {
         res.send(err)

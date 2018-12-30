@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { createBrowserHistory } from 'history';
+import { Switch, Router } from "react-router-dom";
 
 import PublicRoute from "./PublicRouter"
 import PrivateRoute from "./PrivateRouter"
@@ -12,8 +13,10 @@ import SignUp from "../components/Signup"
 import LogIn from "../components/LogIn"
 import LogOut from "../components/LogOut"
 
+export const history = createBrowserHistory();
+
 export default () => (
-    <Router>
+    <Router history={history}>
         <Switch>
             <PrivateRoute path="/" component={Home} exact/>
             <PrivateRoute path="/buy" component={Buy} exact/>

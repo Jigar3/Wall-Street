@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { RoundOf } from "../utils/utils"
+import "../styles/main.css"
 
 interface PassedProps {
     money: {
@@ -24,9 +25,28 @@ class Asset extends React.Component<PassedProps> {
     render() {
         return (
             <div>
-                <p>Money: {this.props.money.money}</p>
-                <p>Total Assets: {this.calcAsset()}</p>
-                <p> Total Value: {RoundOf(this.props.money.money + this.calcAsset(), 2)} </p>
+                <nav className="level">
+                    <div className="level-item has-text-centered">
+                        <div>
+                            <p className="heading">Money</p>
+                            <p className="title">$ {this.props.money.money}</p>
+                        </div>
+                    </div>
+
+                    <div className="level-item has-text-centered">
+                        <div>
+                            <p className="heading">Total Assets</p>
+                            <p className="title">$ {this.calcAsset()}</p>
+                        </div>
+                    </div>
+
+                    <div className="level-item has-text-centered">
+                        <div>
+                            <p className="heading">Total Value</p>
+                            <p className="title">$ {RoundOf(this.props.money.money + this.calcAsset(), 2)}</p>
+                        </div>
+                    </div>
+                </nav>
             </div>
         )
     };

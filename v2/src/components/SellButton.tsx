@@ -46,12 +46,14 @@ class SellButton extends React.Component<PassedProps, State> {
                     ...this.props.allValue,
                     quantity: changedQuantity,
                     shareWorth,
-                    profitLoss
+                    profitLoss,
+                    _id: id
                 }
 
-            axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {quantity: changedQuantity, shareWorth, profitLoss}, {
+            axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, companyDetails, {
                 headers: {"x-auth": localStorage.getItem("JWT_Token")}
             }).then(() => {
+                console.log("patch from sell button")
                 this.props.refresh({id, companyDetails})
             })
             this.props.addToMoney(RoundOf(this.state.quantity * currValue, 2))
