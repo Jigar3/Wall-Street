@@ -14,17 +14,19 @@ interface State {
     quantity: number,
     shareWorth: number,
     loader: boolean,
-    error: string
+    symerror: string,
+    quanerror: string
 }
 
 class Buy extends React.Component<any, State> {
 
     state = {
         symbol: "",
-        quantity: 0,
+        quantity: undefined,
         shareWorth: 0,
         loader: false,
-        error: ""
+        symerror: "",
+        quanerror: ""
     }
 
     handleSubmit = e => {
@@ -32,7 +34,7 @@ class Buy extends React.Component<any, State> {
 
         this.setState({loader: true});
         if(this.state.quantity <= 0 || this.state.quantity % 1 !== 0) {
-            this.setState({error: "Please enter a Positive Integer as quantity", loader: false, symbol: "", quantity: 0})
+            this.setState({quanerror: "Please enter a Positive Integer as quantity", loader: false, symbol: "", quantity: 0})
             return -1;
         }
 
@@ -44,10 +46,10 @@ class Buy extends React.Component<any, State> {
 
                 if ( shareWorth > this.props.money.money ) {
                     this.setState({
-                        error: "Don't have enough cash", 
+                        quanerror: "Don't have enough cash", 
                         loader: false,
                         symbol: "",
-                        quantity: 0
+                        quantity: null
                     });
                     return -1;
                 } else {
@@ -72,55 +74,67 @@ class Buy extends React.Component<any, State> {
 
                     this.setState({
                         symbol: "",
-                        quantity: 0
+                        quantity: undefined
                     })
 
                     history.push("/");
                     }
                 }
-            )
+            ).catch(() => {
+                this.setState({symerror: "Please check if you have entered correct symbol", loader: false})
+            })
     }
 
     handleOnChange = e => {
         this.setState({
             [e.target.name] : [e.target.value]
         } as Pick<State, 'symbol' | 'quantity'> )
-    }
 
-    showshareWorth = () => {
-        if(this.state.shareWorth != 0) {
-            return <p>{this.state.shareWorth}</p>
-        } else {
-            return null;
-        }
+        this.setState({
+            symerror: "",
+            quanerror: ""
+        })
     }
 
     render() {
         return (
-            <div>
+            <section className="section">
+                <div className="container">
 
-                <NavLink to="/">
-                    Home
-                </NavLink>
+                    <h1 className="title is-3" > <span className="has-text-primary is-uppercase">Total Money Left : </span> <span className="is-pulled-right">$ {this.props.money.money}</span> </h1>
 
-                <form onSubmit={this.handleSubmit}>
-                    <label>Symbol</label>
-                    <input type="text" name="symbol" required onChange={this.handleOnChange} value={this.state.symbol}/>
+                    <form onSubmit={this.handleSubmit}>
+                        
+                        <div className="field">
+                            <label className="label">Symbol</label>
+                            <div className="control">
+                                <input className="input" type="text" name="symbol" required onChange={this.handleOnChange} value={this.state.symbol} placeholder="Enter a NASDAQ Stock Symbol"/>
+                                <p className="help is-danger">{this.state.symerror == "" ? undefined : this.state.symerror}</p>
+                            </div>
+                        </div>
 
-                    <label>Quantity</label>
-                    <input type="number" name="quantity" required onChange={this.handleOnChange} value={this.state.quantity}/>
+                        <div className="field">
+                            <label className="label">Quantity</label>
+                            <div className="control">
+                                <input className="input" type="number" name="quantity" required onChange={this.handleOnChange} value={this.state.quantity} placeholder="Enter Number of Stocks to Buy" />
+                                <p className="help is-danger">{this.state.quanerror == "" ? undefined : this.state.quanerror}</p>
+                            </div>
+                        </div>
+                        
+                        <div className="field">
+                            <div className="control">
+                            {this.state.loader ? <button className="button is-primary is-loading is-fullwidth" >Loading</button> : <button className="button is-primary is-outlined is-fullwidth" >Submit</button> }
+                            </div>
+                        </div>
+                    </form>
 
-                    <button>Submit</button>
-                </form>
+                    
+                    
 
-                {this.showshareWorth()}
-                {this.state.error == "" ? undefined : this.state.error}
-                <p>
-                    Money : {this.props.money.money} <br/>
-                </p>
-
-                {this.state.loader ? <p>Waiting......</p> : undefined }
-            </div>
+                    
+                </div>
+        
+            </section>    
         )
     };
 };

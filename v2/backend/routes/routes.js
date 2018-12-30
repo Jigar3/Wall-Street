@@ -63,7 +63,6 @@ router.post("/company", authenticate, (req, res) => {
     company["_creator"] = req.user._id
 
     Portfolio.create(company).then(data => {
-        console.log("company created", data.company)
         res.send(data)
     }).catch(err => {
         res.send(err)
@@ -77,7 +76,6 @@ router.patch("/company", authenticate, (req, res) => {
         if(data == null) {
             return res.status(404).send()
         }
-        console.log("Updated", data)
         res.send(data)
     }).catch(err => {
         res.send(err)

@@ -10,6 +10,48 @@
     margin-top: 0.75rem;
 }
 
+.container {
+    width: 40%
+}
+
+#login_signup {
+    display: flex;
+    justify-content: space-around
+}
+
+#loginactive, #signupactive {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+#login {
+    margin-top: 10%;
+    width: 30%;
+}
+
+#signup {
+    margin-top: 10%;
+    width: 30%;
+}
+
+#usericon {
+    vertical-align: middle;
+}
+
+#name {
+    padding-left: 0.75rem;
+}
+
+#sellGroup {
+    display: flex;
+    justify-content: center;
+}
+
+#sellGroup input {
+    width: 50%;
+    float: right;
+}
+
 #profit {
     color: green;
 }

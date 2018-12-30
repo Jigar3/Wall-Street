@@ -17,7 +17,7 @@ export default class LogOut extends React.Component<any> {
 
     render() {
         return (
-            <button onClick={this.handleClick} className="button is-light">
+            <button onClick={this.handleClick} className="button is-primary">
                 Log Out
             </button>
         )

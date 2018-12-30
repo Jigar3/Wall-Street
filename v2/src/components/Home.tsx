@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import SellButton from "./SellButton";
@@ -8,7 +7,6 @@ import Refresh from "../actions/Refresh";
 import { getUpdate, RoundOf } from "../utils/utils";
 import SellAction from "../actions/Sell";
 import BuyAction from "../actions/Buy";
-import Header from "./Header"
 
 import "../styles/main.css"
 import axios from "axios";
@@ -34,12 +32,9 @@ class Home extends React.Component <PassedProps> {
 	}
 
 	componentDidUpdate(prevProps) {
-		// console.log("Props" , this.props.portfolio, prevProps.portfolio)
 		if(JSON.stringify(this.props.portfolio) !== JSON.stringify(prevProps.portfolio)) {
 			this.props.portfolio.map(item => {
-				console.log(item)
 				axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(() => {
-					console.log("Patch from home")
 				})
 			})
 		}
@@ -64,23 +59,9 @@ class Home extends React.Component <PassedProps> {
 		}
 	)}
 
-
 	render() {
 		return (
 			<div>
-				<Header />
-				
-				{/* <div id="nav">
-					<NavLink to="/buy">Buy</NavLink>
-					<NavLink to="/view">View</NavLink>
-					<NavLink to="/assets">Assets</NavLink>
-					<NavLink to="/signup">Sign Up</NavLink>
-					<NavLink to="/login">Log In</NavLink>
-					<NavLink to="/logout">Log Out</NavLink>
-				</div>
-
-				<br/> */}
-
 				<Asset />
 
 				<section className="hero is-primary is-bold">
@@ -88,7 +69,6 @@ class Home extends React.Component <PassedProps> {
 						<h1 className="title has-text-centered is-uppercase">Portfolio</h1>
 					</div>
 				</section>
-				{/* <h2 className="title has-text-centered">Portfolio</h2> */}
 				
 				<table className="table is-hoverable is-fullwidth">
 					<thead>

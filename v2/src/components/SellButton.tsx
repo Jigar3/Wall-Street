@@ -27,7 +27,7 @@ interface State {
 class SellButton extends React.Component<PassedProps, State> {
 
     state = {
-        quantity: 0,
+        quantity: undefined,
         error: ""
     }
 
@@ -36,7 +36,7 @@ class SellButton extends React.Component<PassedProps, State> {
             this.props.deleteCompany(id);
             axios.delete(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {data: {id}, headers: {"x-auth": localStorage.getItem("JWT_Token")}})
             this.props.addToMoney(RoundOf(maxQuantity * currValue, 2))
-            this.setState({quantity: 0})
+            this.setState({quantity: undefined})
         } else if(this.state.quantity < maxQuantity && this.state.quantity > 0) {
                 const changedQuantity = maxQuantity - this.state.quantity
                 const shareWorth = RoundOf(changedQuantity * currValue, 2)
@@ -59,7 +59,7 @@ class SellButton extends React.Component<PassedProps, State> {
             this.props.addToMoney(RoundOf(this.state.quantity * currValue, 2))
             
             
-            this.setState({quantity: 0})
+            this.setState({quantity: undefined})
         } else {
             this.setState({error: "Invalid Quantity"})
         }
@@ -74,11 +74,14 @@ class SellButton extends React.Component<PassedProps, State> {
 
     render() {
         return (
-            <div>
-                <button onClick={() => this.handleSubmit(this.props.id, this.props.allValue.currPrice, this.props.allValue.quantity, this.props.allValue.buyPrice)} >SELL</button>
-                <input type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} required/>
-
-                {this.state.error ? <p>{this.state.error}</p> : undefined }
+            <div className="field">
+                {/* <p className="control"> */}
+                    <div className="" id="sellGroup">
+                        <input className="input is-small" type="number" name="quantity" placeholder="Quantity To Sell" value={this.state.quantity} onChange={this.handleChange} required/>
+                        <button className="button is-link is-small" onClick={() => this.handleSubmit(this.props.id, this.props.allValue.currPrice, this.props.allValue.quantity, this.props.allValue.buyPrice)} >SELL</button>
+                    </div>
+                    <p className="help is-danger">{this.state.error ? <p>{this.state.error}</p> : undefined }</p>
+                {/* </p> */}
             </div>
         )
     }
