@@ -22,6 +22,11 @@ const getInitialValue = () => {
         })
 
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
+            if(data.data[0] === undefined) {
+                axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(() => {
+                    store.dispatch(Set(10000))
+                })
+            }
             store.dispatch(Set(data.data[0].money))
         })
     }

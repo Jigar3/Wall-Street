@@ -5,7 +5,9 @@ import { NavLink } from "react-router-dom";
 interface State {
     email: String,
     name: String,
-    password: String
+    password: String,
+    error: String,
+    loading: Boolean
 }
 
 class SignUp extends React.Component<any, State> {
@@ -13,19 +15,24 @@ class SignUp extends React.Component<any, State> {
     state = {
         email: "",
         password: "",
-        name: ""
+        name: "",
+        error: undefined,
+        loading: false
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: [e.target.value]
         } as Pick<State, 'email' | 'password'>)
+        this.setState({error: undefined})
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/signup`, {email: this.state.email[0], password: this.state.password[0], name: this.state.name[0]}).then(data => {
+
+        this.setState({loading: true})
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/signup`, 
+                    {email: this.state.email[0], password: this.state.password[0], name: this.state.name[0]}).then(data => {
 
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {email: this.state.email[0], password: this.state.password[0]}).then(data => {
                 localStorage.setItem("JWT_Token", data.headers["x-auth"])
@@ -34,7 +41,9 @@ class SignUp extends React.Component<any, State> {
                 axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
 
                 window.location.href = "/"
-            })
+            }).catch(() => {this.setState({error: "Some Error Ocurred. Please Try Again Later", loading: false})})
+        }).catch(() => {
+            this.setState({error: "This Email Address already is registered", loading: false})
         })
     }
 
@@ -74,11 +83,12 @@ class SignUp extends React.Component<any, State> {
                                 <img src={require("../assets/padlock.png")} alt=""/>
                             </span>
                         </p>
+                        <p className="help is-danger">{this.state.error}</p>
                     </div>
                     
                     <div className="field">
                         <div className="control">
-                            <button className="button is-primary is-fullwidth">Submit</button>
+                        {this.state.loading ? <button className="button is-primary is-loading is-fullwidth" >Loading</button> : <button className="button is-primary is-fullwidth">Submit</button>}
                         </div>
                     </div>
                 </form>

@@ -10,6 +10,7 @@ import BuyAction from "../actions/Buy";
 
 import "../styles/main.css"
 import axios from "axios";
+import { setInterval } from "timers";
 
 interface PassedProps {
 	money: {
@@ -27,7 +28,7 @@ class Home extends React.Component <PassedProps> {
 	}
 	
 	componentDidMount() {
-		let interval = setInterval(this.update, 60000);
+		let interval = setInterval(this.update, 2000);
 		this.setState({intervalId: interval});
 	}
 
