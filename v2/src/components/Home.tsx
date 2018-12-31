@@ -35,7 +35,7 @@ class Home extends React.Component <PassedProps> {
 	componentDidUpdate(prevProps) {
 		if(JSON.stringify(this.props.portfolio) !== JSON.stringify(prevProps.portfolio)) {
 			this.props.portfolio.map(item => {
-				axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, item, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(() => {
+				axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, item, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then(() => {
 				})
 			})
 		}

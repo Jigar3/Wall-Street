@@ -5,7 +5,7 @@ import Header from "../components/Header"
 
 export default ({component: Component, ...rest}) => (
     <Route {...rest} component={(props) => (
-        localStorage.getItem("User_ID") ? (
+        sessionStorage.getItem("User_ID") ? (
             <div>
                 <Header/>
                 <Component {...props}/>

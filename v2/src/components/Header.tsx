@@ -11,13 +11,9 @@ export default class Header extends React.Component {
     }
     
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/me`, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then(data => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/me`, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then(data => {
 			this.setState({name: data.data.name})
 		})
-    }
-
-    getUserName = () => {
-		
     }
     
     render() {

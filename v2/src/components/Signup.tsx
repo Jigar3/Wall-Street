@@ -1,6 +1,6 @@
 import React from "react"
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface State {
     email: String,
@@ -35,10 +35,10 @@ class SignUp extends React.Component<any, State> {
                     {email: this.state.email[0], password: this.state.password[0], name: this.state.name[0]}).then(data => {
 
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {email: this.state.email[0], password: this.state.password[0]}).then(data => {
-                localStorage.setItem("JWT_Token", data.headers["x-auth"])
-                localStorage.setItem("User_ID", data.data._id)
+                sessionStorage.setItem("JWT_Token", data.headers["x-auth"])
+                sessionStorage.setItem("User_ID", data.data._id)
 
-                axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {money: 10000}, {headers: {"x-auth": localStorage.getItem("JWT_Token")}})
+                axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/money`, {money: 10000}, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}})
 
                 window.location.href = "/"
             }).catch(() => {this.setState({error: "Some Error Ocurred. Please Try Again Later", loading: false})})
@@ -52,8 +52,8 @@ class SignUp extends React.Component<any, State> {
             <div className="container" id="signup">
 
                 <div id="login_signup">
-                    <h4 className="title is-uppercase has-text-primary">Sign Up</h4>
-                    <h4 className="title has-text-weight-normal is-uppercase has-text-primary has-text-right"><NavLink to="/login">Log In</NavLink></h4>                  
+                    <h4 className="title is-uppercase has-text-primary active">Sign Up</h4>
+                    <h4 className="title has-text-weight-normal is-uppercase has-text-primary has-text-right"><Link to="/login">Log In</Link></h4>                  
                 </div> 
 
                 <form onSubmit={this.handleSubmit}>

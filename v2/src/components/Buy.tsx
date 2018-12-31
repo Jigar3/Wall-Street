@@ -68,7 +68,7 @@ class Buy extends React.Component<any, State> {
 
                     this.props.subtractFromMoney(this.state.shareWorth);
                     
-                    axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/company`, companyDetails, {headers: {"x-auth": localStorage.getItem("JWT_Token")}}).then((data) => {
+                    axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/company`, companyDetails, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then((data) => {
                         this.props.addCompany(data.data);
                     })
 
@@ -108,7 +108,7 @@ class Buy extends React.Component<any, State> {
                         <div className="field">
                             <label className="label">Symbol</label>
                             <div className="control">
-                                <input className="input" type="text" name="symbol" required onChange={this.handleOnChange} value={this.state.symbol} placeholder="Enter a NASDAQ Stock Symbol"/>
+                                <input className="input" type="text" name="symbol" required onChange={this.handleOnChange} value={this.state.symbol} placeholder="Enter a NASDAQ Stock Symbol (Ex. AAPL)"/>
                                 <p className="help is-danger">{this.state.symerror == "" ? undefined : this.state.symerror}</p>
                             </div>
                         </div>

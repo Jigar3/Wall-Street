@@ -7,10 +7,10 @@ export default class LogOut extends React.Component<any> {
 
     handleClick = () => {
         axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/logout`, {headers: {
-            "x-auth": localStorage.getItem("JWT_Token")
+            "x-auth": sessionStorage.getItem("JWT_Token")
         }}).then(() => {
-            localStorage.removeItem("JWT_Token")
-            localStorage.removeItem("User_ID")
+            sessionStorage.removeItem("JWT_Token")
+            sessionStorage.removeItem("User_ID")
             history.push("/login")
         })
     }

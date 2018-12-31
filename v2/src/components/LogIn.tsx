@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios";
 
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { history } from "../router/Approuter";
 
 interface State {
@@ -32,8 +32,8 @@ class LogIn extends React.Component<any, State> {
 
         this.setState({loading: true})
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {email: this.state.email[0], password: this.state.password[0]}).then(data => {
-            localStorage.setItem("JWT_Token", data.headers["x-auth"])
-            localStorage.setItem("User_ID", data.data._id)
+            sessionStorage.setItem("JWT_Token", data.headers["x-auth"])
+            sessionStorage.setItem("User_ID", data.data._id)
             // history.push("/")
             window.location.href = "/"
         }).catch((err) => {
@@ -47,8 +47,8 @@ class LogIn extends React.Component<any, State> {
             <div className="container" id="login">
 
                 <div id="login_signup">
-                    <h4 className="title is-uppercase has-text-primary">Log In</h4>
-                    <h4 className="title is-uppercase has-text-primary has-text-right has-text-weight-normal"><NavLink to="/signup">Sign Up</NavLink></h4>
+                    <h4 className="title is-uppercase has-text-primary active">Log In</h4>
+                    <h4 className="title is-uppercase has-text-primary has-text-right has-text-weight-normal"><Link to="/signup">Sign Up</Link></h4>
                 </div>
                 <form onSubmit={this.handleSubmit}>
             

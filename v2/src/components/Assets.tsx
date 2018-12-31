@@ -46,6 +46,16 @@ class Asset extends React.Component<PassedProps> {
                             <p className="title">$ {RoundOf(this.props.money.money + this.calcAsset(), 2)}</p>
                         </div>
                     </div>
+
+                    <div className="level-item has-text-centered">
+                        <div>
+                            <p className="heading">Total Profit or Loss</p>
+                            <p className="title" id={RoundOf(this.props.money.money + this.calcAsset() - 10000, 2) >= 0 ? "profit" : "loss"}> 
+                                $ {RoundOf(this.props.money.money + this.calcAsset() - 10000, 2)}
+                                {RoundOf(this.props.money.money + this.calcAsset() - 10000, 2) >= 0 ? <img id="arrow" src={require("../assets/arrow-up.png")} alt=""/> : <img id="arrow" src={require("../assets/arrow-pointing-down.png")} alt=""/> }
+                            </p>
+                        </div>
+                    </div>
                 </nav>
             </div>
         )

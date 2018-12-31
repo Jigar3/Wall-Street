@@ -19,6 +19,11 @@
     justify-content: space-around
 }
 
+#arrow {
+    vertical-align: baseline;
+    padding-left: 0.5rem;
+}
+
 #loginactive, #signupactive {
     text-decoration: underline;
     text-underline-position: under;
