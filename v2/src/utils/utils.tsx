@@ -10,7 +10,7 @@ const RoundOf = (num: number, roundTo: number): number=> {
 };
 
 const getUpdate = async (symbol: string) => {
-    return await axios.get(`${process.env.REACT_APP_BACKEND_URL}/${symbol}/batch?types=quote`)       
+    return await axios.get(`${process.env.REACT_APP_API_URL}/${symbol}/batch?types=quote`)       
 }
 
 const getInitialValue = () => {

@@ -13,7 +13,7 @@ class View extends React.Component {
 
     getData = () => {
         axios.
-            get(`${process.env.REACT_APP_BACKEND_URL}/${this.state.symbol}/batch?types=quote`).
+            get(`${process.env.REACT_APP_API_URL}/${this.state.symbol}/batch?types=quote`).
             then(data => {
                 this.setState({quote: data.data.quote, symbol: ""});
             })
