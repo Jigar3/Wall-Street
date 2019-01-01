@@ -37,6 +37,17 @@
     padding-top: 2rem;
 }
 
+#github {
+    display: flex;
+    /* position: fixed;
+    bottom: 3rem;
+    right: 2rem; */
+}
+
+#github img {
+    padding-right: 0.4rem;
+}
+
 .view_list {
     width: 100%;
     margin: 0 auto;

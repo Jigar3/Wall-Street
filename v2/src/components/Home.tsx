@@ -29,6 +29,9 @@ class Home extends React.Component <PassedProps> {
 	}
 	
 	componentDidMount() {
+		if(sessionStorage.getItem("status") === "OPEN") {
+			clearInterval(this.state.statusInterval)
+		}
 		let statusInterval = setInterval(() => getMarketStatus(), 10000)
 		let interval = setInterval(this.update, 2000);
 		this.setState({intervalId: interval, statusInterval});
@@ -49,7 +52,7 @@ class Home extends React.Component <PassedProps> {
 	}
 
 	update = () => {
-		if(sessionStorage.getItem("status") !== "US Market Closed") {
+		if(sessionStorage.getItem("status") !== "CLOSE") {
 			this.props.portfolio.map((item, index) => {
 				const id = item._id
 				getUpdate(item.company).then(data => {

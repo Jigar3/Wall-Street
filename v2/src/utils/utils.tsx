@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import moment from "moment";
 require("dotenv").config()
 
 import store from "../reduxStore/store";
@@ -15,9 +15,15 @@ const getUpdate = async (symbol: string) => {
 }
 
 const getMarketStatus = () => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/market`).then(data => {
-        sessionStorage.setItem("status", String(data.data))
-        return data.data
+    axios.get("https://api.iextrading.com/1.0/stock/aapl/batch?types=quote").then(data => {
+    
+        const openTime = moment(data.data.quote.openTime)
+        const currTime = moment()
+        if(currTime.isBefore(openTime)) {
+            sessionStorage.setItem("status", "OPEN")
+        } else {
+            sessionStorage.setItem("status", "CLOSE")
+        }
     })
 }
 
