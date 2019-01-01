@@ -28,14 +28,13 @@
 }
 
 #chart {
-    padding-top: 0.2rem;
     margin: 0 auto;
     width: 120%;
-    transform: translateX(-12%)
+    transform: translateX(-12%) translateY(-1rem)
 }
 
 #view_title {
-    padding-top: 1rem;
+    padding-top: 2rem;
 }
 
 .view_list {
