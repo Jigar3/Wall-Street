@@ -1,4 +1,5 @@
 import axios from "axios";
+import React from "react";
 require("dotenv").config()
 
 import store from "../reduxStore/store";
@@ -29,11 +30,20 @@ const getInitialValue = () => {
             }
             store.dispatch(Set(data.data[0].money))
         })
+
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/me`, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then(data => {
+			sessionStorage.setItem("name", data.data.name)
+        })
+        
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/market`).then(data => {
+            sessionStorage.setItem("status", String(data.data))
+        })
     }
 }
 
 export {
     RoundOf,
     getUpdate,
-    getInitialValue
+    getInitialValue,
+    // getMarketStatus
 }

@@ -1,5 +1,7 @@
 const express = require("express")
 const _ = require("lodash")
+const cheerio = require('cheerio')
+const axios = require("axios")
 
 const router = express.Router()
 const { authenticate } = require("../middleware/authenticate")
@@ -89,6 +91,16 @@ router.delete("/company", authenticate, (req, res) => {
         }).catch(err => {
             res.send(err)
         })
+})
+
+router.get("/market", (req, res) => {
+    axios.get("https://www.nasdaq.com/").then(data => {
+        let $ = cheerio.load(data.data)
+
+        let title = $('.indexmktstatus');
+
+        res.send(title.text())
+    })
 })
 
 module.exports = router

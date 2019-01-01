@@ -1,20 +1,9 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
-import axios from "axios"
 
 import LogOut from "../components/LogOut"
 
 export default class Header extends React.Component {
-
-    state = {
-        name: ""
-    }
-    
-    componentDidMount() {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/me`, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then(data => {
-			this.setState({name: data.data.name})
-		})
-    }
     
     render() {
         return (
@@ -31,12 +20,24 @@ export default class Header extends React.Component {
                             <NavLink to="/" className="navbar-item">Home</NavLink>
                             <NavLink to="/buy" className="navbar-item">Buy</NavLink>
                             <NavLink to="/view" className="navbar-item">View</NavLink>
-                            <a href="http://www.isnasdaqopen.com/" className="navbar-item" target="blank">Check Market Status</a>
+                            {/* <a href="http://www.isnasdaqopen.com/" className="navbar-item" target="blank">Check Market Status</a> */}
+                            <a href="https://zerodha.com/varsity/" className="navbar-item" target="_blank">Learn About Investing</a>
+                            {/* <span className="navbar-item">{sessionStorage.getItem("status")}</span> */}
                         </div>
         
                         <div className="navbar-end">
                             <div className="navbar-item">
-                                <h5 className="title is-6"> <span className="icon" id="usericon"> <img src={require("../assets/avatar.png")} alt=""/> </span> <span className="has-text-weight-normal" id="name">{this.state.name}</span> </h5>
+                                <a href="http://isnasdaqopen.com" target="_blank" id="status_label">Market Status:</a> {sessionStorage.getItem("status") === "US Market Closed" ? <span id="close">CLOSE</span> : <span id="open">LIVE</span> }
+                            </div>
+                            <div className="navbar-item">
+                                <h5 className="title is-6"> 
+                                    <span className="icon" id="usericon"> 
+                                        <img src={require("../assets/avatar.png")} alt=""/> 
+                                    </span> 
+                                    <span className="has-text-weight-normal" id="name">
+                                        {sessionStorage.getItem("name")}
+                                    </span> 
+                                </h5>
                             </div>
                             <div className="navbar-item">
                                 <LogOut />

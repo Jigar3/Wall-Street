@@ -46,19 +46,22 @@ class Home extends React.Component <PassedProps> {
 	}
 
 	update = () => {
-		this.props.portfolio.map((item, index) => {
-			const id = item._id
-			getUpdate(item.company).then(data => {
-				let companyDetails = {
-						...item,
-						currPrice: data.data.quote.latestPrice,
-						profitLoss: RoundOf((data.data.quote.latestPrice - item.buyPrice) * item.quantity, 2),
-						shareWorth: RoundOf(item.quantity * data.data.quote.latestPrice, 2)
-				};
-				this.props.refresh({id, companyDetails});
-			});
-		}
-	)}
+		if(sessionStorage.getItem("status") !== "US Market Closed") {
+			this.props.portfolio.map((item, index) => {
+				const id = item._id
+				getUpdate(item.company).then(data => {
+					let companyDetails = {
+							...item,
+							currPrice: data.data.quote.latestPrice,
+							profitLoss: RoundOf((data.data.quote.latestPrice - item.buyPrice) * item.quantity, 2),
+							shareWorth: RoundOf(item.quantity * data.data.quote.latestPrice, 2)
+					};
+					this.props.refresh({id, companyDetails});
+				});
+			})
+		}	
+	
+	}
 
 	render() {
 		return (
@@ -90,10 +93,10 @@ class Home extends React.Component <PassedProps> {
 								<tr key={e._id}>
 									<td>{e.companyName}</td>
 									<td>{e.quantity}</td>
-									<td>{e.buyPrice}</td>
-									<td>{e.currPrice}</td>
-									<td>{e.shareWorth}</td>
-									<td>{e.profitLoss >= 0 ? <span id="profit">{e.profitLoss}</span> : <span id="loss">{e.profitLoss}</span>}</td>
+									<td>$ {e.buyPrice}</td>
+									<td>$ {e.currPrice}</td>
+									<td>$ {e.shareWorth}</td>
+									<td>{e.profitLoss >= 0 ? <span id="profit">$ {e.profitLoss}</span> : <span id="loss">$ {e.profitLoss}</span>}</td>
 									<td><SellButton id={e._id} allValue={e}></SellButton></td>
 								</tr>
 								)}

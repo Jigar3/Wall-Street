@@ -1,4 +1,3 @@
-import React from "react";
 import { createStore, combineReducers } from "redux";
 
 import Portfolio from "../reducers/Portfolio";
