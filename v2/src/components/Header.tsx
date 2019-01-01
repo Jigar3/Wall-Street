@@ -2,9 +2,14 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 import LogOut from "../components/LogOut"
+import { getMarketStatus } from "../utils/utils"
 
 export default class Header extends React.Component {
-    
+
+    componentDidMount() {
+        getMarketStatus()
+    }
+
     render() {
         return (
             <div>
@@ -27,7 +32,10 @@ export default class Header extends React.Component {
         
                         <div className="navbar-end">
                             <div className="navbar-item">
-                                <a href="http://isnasdaqopen.com" target="_blank" id="status_label">Market Status:</a> {sessionStorage.getItem("status") === "US Market Closed" ? <span id="close">CLOSE</span> : <span id="open">LIVE</span> }
+                                <a href="http://isnasdaqopen.com" target="_blank" id="status_label">Market Status:</a> 
+                                    {sessionStorage.getItem("status") === "US Market Closed" 
+                                    ? <span id="close">CLOSE</span> 
+                                    : <span id="open">LIVE</span> }
                             </div>
                             <div className="navbar-item">
                                 <h5 className="title is-6"> 

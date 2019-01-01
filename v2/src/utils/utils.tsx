@@ -14,6 +14,12 @@ const getUpdate = async (symbol: string) => {
     return await axios.get(`${process.env.REACT_APP_API_URL}/${symbol}/batch?types=quote`)       
 }
 
+const getMarketStatus = () => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/market`).then(data => {
+        sessionStorage.setItem("status", String(data.data))
+    })
+}
+
 const getInitialValue = () => {
     if(sessionStorage.getItem("User_ID")) {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then(data => {
@@ -35,9 +41,7 @@ const getInitialValue = () => {
 			sessionStorage.setItem("name", data.data.name)
         })
         
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/market`).then(data => {
-            sessionStorage.setItem("status", String(data.data))
-        })
+        getMarketStatus()
     }
 }
 
@@ -45,5 +49,5 @@ export {
     RoundOf,
     getUpdate,
     getInitialValue,
-    // getMarketStatus
+    getMarketStatus
 }

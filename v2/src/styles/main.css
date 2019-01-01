@@ -19,6 +19,26 @@
     justify-content: space-around
 }
 
+#search_box_view {
+    margin-top: 2rem;
+}
+
+.view_list li span {
+    font-weight: 600
+}
+
+.view_list {
+    width: 100%;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.view_list li {
+    display: flex;
+    text-align: left;
+    justify-content: space-between
+}
+
 #arrow {
     vertical-align: baseline;
     padding-left: 0.5rem;

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import SellButton from "./SellButton";
 import Asset from "./Assets";
 import Refresh from "../actions/Refresh";
-import { getUpdate, RoundOf } from "../utils/utils";
+import { getUpdate, RoundOf, getMarketStatus } from "../utils/utils";
 import SellAction from "../actions/Sell";
 import BuyAction from "../actions/Buy";
 
@@ -24,12 +24,14 @@ interface PassedProps {
 class Home extends React.Component <PassedProps> {
 
 	state = {
-		intervalId: null
+		intervalId: null,
+		statusInterval: null
 	}
 	
 	componentDidMount() {
+		let statusInterval = setInterval(() => getMarketStatus(), 10000)
 		let interval = setInterval(this.update, 2000);
-		this.setState({intervalId: interval});
+		this.setState({intervalId: interval, statusInterval});
 	}
 
 	componentDidUpdate(prevProps) {
@@ -43,6 +45,7 @@ class Home extends React.Component <PassedProps> {
 
 	componentWillUnmount() {
 		clearInterval(this.state.intervalId);
+		clearInterval(this.state.statusInterval)
 	}
 
 	update = () => {

@@ -11,6 +11,8 @@ export default class LogOut extends React.Component<any> {
         }}).then(() => {
             sessionStorage.removeItem("JWT_Token")
             sessionStorage.removeItem("User_ID")
+            sessionStorage.removeItem("name")
+            sessionStorage.removeItem("status")
             history.push("/login")
         })
     }
