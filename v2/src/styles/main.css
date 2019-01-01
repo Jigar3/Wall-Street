@@ -27,6 +27,17 @@
     font-weight: 600
 }
 
+#chart {
+    padding-top: 0.2rem;
+    margin: 0 auto;
+    width: 120%;
+    transform: translateX(-12%)
+}
+
+#view_title {
+    padding-top: 1rem;
+}
+
 .view_list {
     width: 100%;
     margin: 0 auto;

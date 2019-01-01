@@ -2,12 +2,13 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 import LogOut from "../components/LogOut"
-import { getMarketStatus } from "../utils/utils"
+import { getMarketStatus, setUserName } from "../utils/utils"
 
 export default class Header extends React.Component {
 
     componentDidMount() {
         getMarketStatus()
+        setUserName()
     }
 
     render() {
@@ -25,9 +26,7 @@ export default class Header extends React.Component {
                             <NavLink to="/" className="navbar-item">Home</NavLink>
                             <NavLink to="/buy" className="navbar-item">Buy</NavLink>
                             <NavLink to="/view" className="navbar-item">View</NavLink>
-                            {/* <a href="http://www.isnasdaqopen.com/" className="navbar-item" target="blank">Check Market Status</a> */}
                             <a href="https://zerodha.com/varsity/" className="navbar-item" target="_blank">Learn About Investing</a>
-                            {/* <span className="navbar-item">{sessionStorage.getItem("status")}</span> */}
                         </div>
         
                         <div className="navbar-end">
