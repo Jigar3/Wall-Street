@@ -66,18 +66,18 @@ class Buy extends React.Component<any, State> {
                         profitLoss: 0
                     }
 
-                    this.props.subtractFromMoney(this.state.shareWorth);
+                    
                     
                     axios.post(`${process.env.REACT_APP_BACKEND_URL}/state/company`, companyDetails, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then((data) => {
                         this.props.addCompany(data.data);
+                        this.props.subtractFromMoney(this.state.shareWorth);
+                        this.setState({
+                            symbol: "",
+                            quantity: ""
+                        })
+    
+                        history.push("/");
                     })
-
-                    this.setState({
-                        symbol: "",
-                        quantity: ""
-                    })
-
-                    history.push("/");
                     }
                 }
             ).catch(() => {

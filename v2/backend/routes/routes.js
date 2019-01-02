@@ -96,10 +96,20 @@ router.delete("/company", authenticate, (req, res) => {
 router.get("/market", (req, res) => {
     axios.get("https://www.nasdaq.com/").then(data => {
         let $ = cheerio.load(data.data)
+        let status;
+        let title = $('.indexmktstatus').text().trim();
+        
+        if(title.localeCompare("US Market Open")) {
+            status = "OPEN"
+        } else {
+            status = "CLOSE"
+        }
 
-        let title = $('.indexmktstatus');
+        data = {
+            status
+        }
 
-        res.send(title.text())
+        res.send(data)
     })
 })
 

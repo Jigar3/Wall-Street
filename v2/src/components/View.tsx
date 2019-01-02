@@ -109,7 +109,6 @@ class View extends React.Component {
                         <StockAreaChart data={this.state.data} />
                     </div>
                 }
-
             </div>
         )
     };

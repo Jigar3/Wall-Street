@@ -14,16 +14,28 @@ const getUpdate = async (symbol: string) => {
     return await axios.get(`${process.env.REACT_APP_API_URL}/${symbol}/batch?types=quote`)       
 }
 
-const getMarketStatus = () => {
-    axios.get("https://api.iextrading.com/1.0/stock/aapl/batch?types=quote").then(data => {
+// const getMarketStatus = () => {
+//     axios.get("https://api.iextrading.com/1.0/stock/aapl/batch?types=quote").then(data => {
     
-        const openTime = moment(data.data.quote.openTime)
-        const currTime = moment()
-        if(currTime.isBefore(openTime)) {
-            sessionStorage.setItem("status", "OPEN")
-        } else {
-            sessionStorage.setItem("status", "CLOSE")
-        }
+//         const openTime = moment(data.data.quote.latestUpdate)
+//         const currTime = moment()
+//         if(currTime.isBefore(openTime)) {
+//             sessionStorage.setItem("status", "OPEN")
+//         } else {
+//             sessionStorage.setItem("status", "CLOSE")
+//         }
+//     })
+// }
+
+const getMarketStatus = () => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/market`).then(data => {
+        // console.log(data.data)
+        // if(data.data.stat === "US Market Open") {
+        //     sessionStorage.setItem("status", "OPEN")
+        // } else {
+        //     sessionStorage.setItem("status", "CLOSE")
+        // }
+        sessionStorage.setItem("status", data.data.status)
     })
 }
 

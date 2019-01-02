@@ -76,6 +76,13 @@
     color: black;
 }
 
+#suggestion_box {
+    width: 40%;
+    background: grey;
+    color: white;
+    padding-left: 100px;
+}
+
 #close {
     border: 1px red solid;
     color: red;
