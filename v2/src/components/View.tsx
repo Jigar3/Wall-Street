@@ -92,7 +92,7 @@ class View extends React.Component {
                             <li>Company Name: <span>{this.state.quote.companyName}</span></li>
                             <li>Symbol: <span>{this.state.quote.symbol}</span></li>
                             <li>Sector: <span>{this.state.quote.sector}</span></li>
-                            <li>Current Price: <span>{this.state.quote.latestPrice}</span></li>
+                            <li>Current Price: <span id="currPrice">$ {this.state.quote.latestPrice}</span></li>
                             <li>Open Price: <span>$ {this.state.quote.open}</span></li> 
                             <li>Hign Price <span>$ {this.state.quote.high}</span></li> 
                             <li>Low Price <span>$ {this.state.quote.low}</span></li> 

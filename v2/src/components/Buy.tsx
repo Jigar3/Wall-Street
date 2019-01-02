@@ -11,7 +11,7 @@ import { history } from "../router/Approuter";
 
 interface State {
     symbol: string,
-    quantity: number,
+    quantity: number | string,
     shareWorth: number,
     loader: boolean,
     symerror: string,
@@ -22,7 +22,7 @@ class Buy extends React.Component<any, State> {
 
     state = {
         symbol: "",
-        quantity: undefined,
+        quantity: "",
         shareWorth: 0,
         loader: false,
         symerror: "",
@@ -33,8 +33,8 @@ class Buy extends React.Component<any, State> {
         e.preventDefault();
 
         this.setState({loader: true});
-        if(this.state.quantity <= 0 || this.state.quantity % 1 !== 0) {
-            this.setState({quanerror: "Please enter a Positive Integer as quantity", loader: false, symbol: "", quantity: 0})
+        if(Number(this.state.quantity) <= 0 || Number(this.state.quantity) % 1 !== 0) {
+            this.setState({quanerror: "Please enter a Positive Integer as quantity", loader: false, symbol: "", quantity: ""})
             return -1;
         }
 
@@ -42,14 +42,14 @@ class Buy extends React.Component<any, State> {
             .get(`${process.env.REACT_APP_API_URL}/${String(this.state.symbol).trim()}/batch?types=quote`)
             .then(data => {
 
-                const shareWorth = RoundOf(data.data.quote.latestPrice * this.state.quantity, 2);
+                const shareWorth = RoundOf(data.data.quote.latestPrice * Number(this.state.quantity), 2);
 
                 if ( shareWorth > this.props.money.money ) {
                     this.setState({
                         quanerror: "Don't have enough cash", 
                         loader: false,
                         symbol: "",
-                        quantity: null
+                        quantity: ""
                     });
                     return -1;
                 } else {
@@ -74,7 +74,7 @@ class Buy extends React.Component<any, State> {
 
                     this.setState({
                         symbol: "",
-                        quantity: undefined
+                        quantity: ""
                     })
 
                     history.push("/");

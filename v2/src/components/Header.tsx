@@ -30,16 +30,16 @@ export default class Header extends React.Component {
                             <NavLink to="/buy" className="navbar-item">Buy</NavLink>
                             <NavLink to="/view" className="navbar-item">View</NavLink>
                             <a href="https://zerodha.com/varsity/" className="navbar-item" target="_blank">Learn About Investing</a>
-                            <div className="navbar-item">
-                                <a className="title is-6" href="https://github.com/Jigar3/Wall-Street" target="_blank"> 
-                                    <span className="icon" id="usericon"> 
-                                        <img src={require("../assets/github-logo.png")} alt=""/> 
-                                    </span> 
-                                    <span className="has-text-weight-normal" id="name">
-                                        Github
-                                    </span> 
-                                </a>
-                            </div>
+                                <div className="navbar-item">
+                                    <a className="title is-6" href="https://github.com/Jigar3/Wall-Street" target="_blank"> 
+                                        <span className="icon" id="usericon"> 
+                                            <img src={require("../assets/github-logo.png")} alt=""/> 
+                                        </span> 
+                                        <span className="has-text-weight-normal" id="name">
+                                            Github
+                                        </span> 
+                                    </a>
+                                </div>
                         </div>
         
                         <div className="navbar-end">

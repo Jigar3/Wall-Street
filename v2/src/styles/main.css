@@ -39,9 +39,14 @@
 
 #github {
     display: flex;
-    /* position: fixed;
-    bottom: 3rem;
-    right: 2rem; */
+}
+
+#currPrice {
+    padding: 0px 5px;
+    border: 1px black solid;
+    background: black;
+    color: white;
+    font-weight: 300;
 }
 
 #github img {
