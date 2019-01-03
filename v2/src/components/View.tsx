@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import StockAreaChart from "./StockAreaChart"
+import AutoCompleteInput from './AutoCompleteInput'
 import { RoundOf } from "../utils/utils"
 
 const _ = require("lodash");
@@ -109,6 +110,8 @@ class View extends React.Component {
                         <StockAreaChart data={this.state.data} />
                     </div>
                 }
+
+                {/* <AutoCompleteInput placeholder='Enter a NASDAQ Stock Symbol(Ex.AAPL)'/> */}
             </div>
         )
     };

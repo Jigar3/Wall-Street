@@ -2,6 +2,8 @@ const express = require("express")
 const _ = require("lodash")
 const cheerio = require('cheerio')
 const axios = require("axios")
+const fs = require('fs')
+const path = require("path")
 
 const router = express.Router()
 const { authenticate } = require("../middleware/authenticate")
@@ -99,7 +101,7 @@ router.get("/market", (req, res) => {
         let status;
         let title = $('.indexmktstatus').text().trim();
         
-        if(title.localeCompare("US Market Open")) {
+        if(title.localeCompare("US Market Open") == 1) {
             status = "OPEN"
         } else {
             status = "CLOSE"
@@ -111,6 +113,10 @@ router.get("/market", (req, res) => {
 
         res.send(data)
     })
+})
+
+router.get("/symbols", (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'assets', 'symbols.json'))
 })
 
 module.exports = router

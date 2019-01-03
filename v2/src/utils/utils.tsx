@@ -4,10 +4,11 @@ require("dotenv").config()
 
 import store from "../reduxStore/store";
 import AddCompany from "../actions/Addcompany"
+import FetchSymbols from "../actions/FetchSymbols"
 import Set from "../actions/SetMoney"
 
 const RoundOf = (num: number, roundTo: number): number=> {
-    return Number((num).toFixed(roundTo));
+    return Number((num*1).toFixed(roundTo));
 };
 
 const getUpdate = async (symbol: string) => {
@@ -46,6 +47,12 @@ const setUserName = () => {
     })
 }
 
+const getSymbols = () => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/symbols`).then(data => {
+        store.dispatch(FetchSymbols(data.data.data))
+    })
+}
+
 const getInitialValue = () => {
     if(sessionStorage.getItem("User_ID")) {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/company`, {headers: {"x-auth": sessionStorage.getItem("JWT_Token")}}).then(data => {
@@ -62,9 +69,14 @@ const getInitialValue = () => {
             }
             store.dispatch(Set(data.data[0].money))
         })
+
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/state/symbols`).then(data => {
+            store.dispatch(FetchSymbols(data.data.data))
+        })
         
         setUserName()
         getMarketStatus()
+        // getSymbols()
     }
 }
 

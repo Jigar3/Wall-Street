@@ -1,27 +1,27 @@
 import React from "react"
 import Autosuggest from 'react-autosuggest';
-
-const symbols = require("../assets/sym.tsx");
+import store from "../reduxStore/store"
 
 const getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 
-    return inputLength === 0 ? [] : symbols.symbol.filter(sym =>
-        sym.name.toLowerCase().slice(0, inputLength) === inputValue
-    );
+    return inputLength === 0 ? [] : store.getState().symbol.filter(sym => {
+            return sym.toLowerCase().slice(0, inputLength) === inputValue
+        } 
+    ).slice(0, 5);
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion;
 
 const renderSuggestion = suggestion => (
-    <div id="suggestion_box">
-        {suggestion.name}
+    <div>
+        {suggestion}
     </div>
 );
 
 
-class AutoCompleteInput extends React.Component {
+class AutoCompleteInput extends React.Component<any> {
 
     state = {
         value: '',
@@ -50,7 +50,7 @@ class AutoCompleteInput extends React.Component {
         const { value, suggestions } = this.state;
 
         const inputProps = {
-            placeholder: 'Enter a NASDAQ Stock Symbol(Ex.AAPL)',
+            placeholder: this.props.placeholder,
             value,
             onChange: this.onChange
         };
