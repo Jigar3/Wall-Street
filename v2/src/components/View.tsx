@@ -1,11 +1,30 @@
 import React from "react";
 import axios from "axios";
+import Autosuggest from 'react-autosuggest';
 
+import store from "../reduxStore/store"
 import StockAreaChart from "./StockAreaChart"
-import AutoCompleteInput from './AutoCompleteInput'
 import { RoundOf } from "../utils/utils"
 
 const _ = require("lodash");
+
+const getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0 ? [] : store.getState().symbol.filter(sym => {
+            return sym.toLowerCase().slice(0, inputLength) === inputValue
+        } 
+    ).slice(0, 5);
+};
+
+const getSuggestionValue = suggestion => suggestion;
+
+const renderSuggestion = suggestion => (
+    <div>
+        {suggestion}
+    </div>
+);
 
 class View extends React.Component {
 
@@ -15,13 +34,14 @@ class View extends React.Component {
         loading: false,
         error: "",
         data: [],
-        dataLoad: false
+        dataLoad: false,
+        suggestions: []
     }
 
     getData = () => {
         this.setState({loading: true})
         axios.
-            get(`${process.env.REACT_APP_API_URL}/${String(this.state.symbol).trim()}/batch?types=quote`).
+            get(`${process.env.REACT_APP_API_URL}/${String(this.state.symbol)}/batch?types=quote`).
             then(data => {
                 this.setState({quote: data.data.quote, symbol: "", loading: false});
             }).catch(() => {
@@ -41,9 +61,21 @@ class View extends React.Component {
         this.getStockData()
     }
 
-    handleOnChange = (e) => {
-        this.setState({symbol: e.target.value, quote: null, error: "", loading: false, dataLoad: false})
+    handleOnChange = (e, { newValue }) => {
+        this.setState({symbol: newValue, quote: null, error: "", loading: false, dataLoad: false})
     }
+
+    onSuggestionsFetchRequested = ({ value }) => {
+        this.setState({
+            suggestions: getSuggestions(value)
+        });
+    };
+
+    onSuggestionsClearRequested = () => {
+            this.setState({
+            suggestions: []
+        });
+    };
 
     getStockData = () => {
         let stockData = []
@@ -60,7 +92,22 @@ class View extends React.Component {
         }) 
     }
 
+    onSuggestionSelected = () => {
+        this.getData()
+        this.getStockData()
+    }
+
     render() {
+
+        const { symbol, suggestions } = this.state;
+
+        const inputProps = {
+            placeholder: "Enter a NASDAQ Stock Symbol(Ex.AAPL)",
+            value: symbol,
+            onChange: this.handleOnChange,
+            onKeyPress: this.handleEnterPress
+        };
+
         return (
             <div className="container" id="search_box_view">
                 <div className="field is-horizontal">
@@ -68,7 +115,7 @@ class View extends React.Component {
                         <span className="icon is-small is-right">
                             <img src={require("../assets/search.png")} alt=""/>
                         </span>
-                        <input 
+                        {/* <input 
                             className="input"
                             type="text" 
                             name="symbol"
@@ -77,6 +124,15 @@ class View extends React.Component {
                             autoComplete={"off"}
                             value={this.state.symbol}
                             placeholder="Enter a NASDAQ Stock Symbol(Ex. AAPL)"
+                        /> */}
+                        <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={getSuggestionValue}
+                            renderSuggestion={renderSuggestion}
+                            inputProps={inputProps}
+                            onSuggestionSelected={this.onSuggestionSelected}
                         />
                         {this.state.error ? <p className="help is-danger">{this.state.error}</p> : undefined}
                     </div>
@@ -111,7 +167,7 @@ class View extends React.Component {
                     </div>
                 }
 
-                {/* <AutoCompleteInput placeholder='Enter a NASDAQ Stock Symbol(Ex.AAPL)'/> */}
+                
             </div>
         )
     };
