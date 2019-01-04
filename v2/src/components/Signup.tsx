@@ -42,8 +42,9 @@ class SignUp extends React.Component<any, State> {
 
                 window.location.href = "/"
             }).catch(() => {this.setState({error: "Some Error Ocurred. Please Try Again Later", loading: false})})
-        }).catch(() => {
-            this.setState({error: "This Email Address already is registered", loading: false})
+        }).catch((err) => {
+            console.log(err)
+            this.setState({error: "This Email Address already is registered or you have entered an invalid email address", loading: false})
         })
     }
 
