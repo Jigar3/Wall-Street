@@ -23,6 +23,8 @@ yarn start
 
 The App uses a Mongo database so you will need to start a mongo service first on your local machine or if you don't want local mongo instance you can use mLab. Replace your mLabURI with the local one in mongoose-setup.js and put your username and password in a .env file. Sample env file is given.
 
+To add a feature request just create an issue.
+
 Enjoy!!
 
-Its still a WIP.
+
