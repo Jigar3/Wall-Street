@@ -29,6 +29,7 @@ export default class Header extends React.Component {
                             <NavLink to="/" className="navbar-item">Home</NavLink>
                             <NavLink to="/buy" className="navbar-item">Buy</NavLink>
                             <NavLink to="/view" className="navbar-item">View</NavLink>
+                            <NavLink to="/leaderboard" className="navbar-item">Leaderboard</NavLink>
                             <a href="https://zerodha.com/varsity/" className="navbar-item" target="_blank">Learn About Investing</a>
                                 <div className="navbar-item">
                                     <a className="title is-6" href="https://github.com/Jigar3/Wall-Street" target="_blank"> 

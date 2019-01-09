@@ -56,7 +56,6 @@ router.get("/leaderboard", (req, res) => {
                 no_of_stocks_giving_profit = 0
                 no_of_stocks_giving_loss = 0
                 portfolio.map(item => {
-                    // console.log(item.profitLoss)
                     if(item.profitLoss >= 0) {no_of_stocks_giving_profit++}
                     if(item.profitLoss < 0) {no_of_stocks_giving_loss++}
                     profitLoss += item.profitLoss
@@ -71,7 +70,6 @@ router.get("/leaderboard", (req, res) => {
                     profitLoss: Number(profitLoss).toFixed(2)
                 }
 
-                // console.log(leaderboard_data)
                 leaderboard.push(leaderboard_data)
             })
 
@@ -83,7 +81,7 @@ router.get("/leaderboard", (req, res) => {
                 return b.profitLoss - a.profitLoss
             })
             res.send(leaderboard)
-        }, 100)
+        }, 500)
         
     })
 })

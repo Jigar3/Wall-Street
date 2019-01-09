@@ -12,6 +12,7 @@ import Assets from "../components/Assets"
 import SignUp from "../components/Signup"
 import LogIn from "../components/LogIn"
 import LogOut from "../components/LogOut"
+import Leaderboard from "../components/Leaderboard"
 
 export const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ export default () => (
             <PublicRoute path="/signup" component={SignUp} exact/>
             <PublicRoute path="/login" component={LogIn} exact/>
             <PrivateRoute path="/logout" component={LogOut} exact/>
+            <PrivateRoute path="/leaderboard" component={Leaderboard} exact />
         </Switch>
     </Router>
 );

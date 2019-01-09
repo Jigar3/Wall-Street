@@ -18,7 +18,6 @@ const getMarketStatus = () => {
     axios.get("https://api.iextrading.com/1.0/stock/aapl/batch?types=quote").then(data => {
     
         let status = data.data.quote.latestSource
-        console.log(status.localeCompare("Close"))
         if(status.localeCompare("Close") == 0 || status.localeCompare("Previous close") == 0) {
             sessionStorage.setItem("status", "CLOSE")
         } else {
