@@ -4,6 +4,7 @@ const _ = require("lodash")
 
 const { authenticate } = require("../middleware/authenticate")
 const { User } = require("../models/user")
+const { Portfolio } = require("../models/model")
 
 router.post("/signup", (req, res) => {
     let body = _.pick(req.body, ["email", "password", "name"])
@@ -40,6 +41,50 @@ router.delete("/logout", authenticate, (req, res) => {
         res.status(200).send("logged out")
     }).catch(err => {
         res.status(400).send(err)
+    })
+})
+
+
+router.get("/leaderboard", (req, res) => {
+
+    leaderboard = []
+    User.find().then(data => {
+        data.map(user => {
+            
+            Portfolio.find({_creator: user._id}).then(portfolio => {
+                profitLoss = 0
+                no_of_stocks_giving_profit = 0
+                no_of_stocks_giving_loss = 0
+                portfolio.map(item => {
+                    // console.log(item.profitLoss)
+                    if(item.profitLoss >= 0) {no_of_stocks_giving_profit++}
+                    if(item.profitLoss < 0) {no_of_stocks_giving_loss++}
+                    profitLoss += item.profitLoss
+                })
+
+                leaderboard_data = {
+                    creator_id: user._id,
+                    creator_name: user.name,
+                    no_of_stocks: portfolio.length,
+                    no_of_stocks_giving_profit,
+                    no_of_stocks_giving_loss,
+                    profitLoss: Number(profitLoss).toFixed(2)
+                }
+
+                // console.log(leaderboard_data)
+                leaderboard.push(leaderboard_data)
+            })
+
+            
+        })
+
+        setTimeout(() => {
+            leaderboard.sort((a, b) => {
+                return b.profitLoss - a.profitLoss
+            })
+            res.send(leaderboard)
+        }, 100)
+        
     })
 })
 
