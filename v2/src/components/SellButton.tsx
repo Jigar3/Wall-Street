@@ -54,6 +54,7 @@ class SellButton extends React.Component<PassedProps, State> {
             axios.patch(`${process.env.REACT_APP_BACKEND_URL}/state/company`, companyDetails, {
                 headers: {"x-auth": sessionStorage.getItem("JWT_Token")}
             }).then(() => {
+                this.props.deleteCompany({id})
                 this.props.refresh({id, companyDetails})
                 this.props.addToMoney(RoundOf(this.state.quantity * currValue, 2))
                 this.setState({quantity: ""})

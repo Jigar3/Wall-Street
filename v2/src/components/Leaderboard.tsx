@@ -23,9 +23,6 @@ class Leaderboard extends React.Component {
 							<th>Sr. No</th>
 							<th>Name of the User</th>
 							<th>Total Profit</th>
-							<th>Total Stocks</th>
-							<th>Good Stocks</th>
-							<th>Bad Stocks</th>
 						</tr>
 					</thead>
                     { !this.state.gotData ? <h1>Loading....</h1> : 
@@ -36,11 +33,8 @@ class Leaderboard extends React.Component {
                                         return (
                                             <tr key={user.creator}>
                                                 <td> {index+1} </td>
-                                                <td> {user.creator_name} </td>
+                                                <td> {user.name.toUpperCase()} </td>
                                                 <td> $ {user.profitLoss} </td>
-                                                <td> {user.no_of_stocks} </td>
-                                                <td> {user.no_of_stocks_giving_profit} </td>
-                                                <td> {user.no_of_stocks_giving_loss} </td>
                                             </tr>
                                         )
                                     }

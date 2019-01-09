@@ -107,16 +107,16 @@
 }
 
 .leaderboard {
-    width: 60%;
+    width: 40%;
     margin-top: 2rem;
 }
 
-.leaderboard tbody tr:first-of-type {
+/* .leaderboard tbody tr:first-of-type {
     font-weight: 500;
     font-size: 1.45rem;
-}
+} */
 
-.leaderboard tbody tr:nth-child(2) {
+/* .leaderboard tbody tr:nth-child(2) {
     font-weight: 500;
     font-size: 1.35rem;
 }
@@ -124,7 +124,7 @@
 .leaderboard tbody tr:nth-child(3) {
     font-weight: 500;
     font-size: 1.15rem;
-}
+} */
 
 .loader {
     size: 10rem;

@@ -45,45 +45,87 @@ router.delete("/logout", authenticate, (req, res) => {
 })
 
 
-router.get("/leaderboard", (req, res) => {
+// router.get("/leaderboard", (req, res) => {
 
-    leaderboard = []
-    User.find().then(data => {
-        data.map(user => {
+//     leaderboard = []
+//     User.find().then(data => {
+//         data.map(user => {
             
-            Portfolio.find({_creator: user._id}).then(portfolio => {
-                profitLoss = 0
-                no_of_stocks_giving_profit = 0
-                no_of_stocks_giving_loss = 0
-                portfolio.map(item => {
-                    if(item.profitLoss >= 0) {no_of_stocks_giving_profit++}
-                    if(item.profitLoss < 0) {no_of_stocks_giving_loss++}
-                    profitLoss += item.profitLoss
+//             Portfolio.find({_creator: user._id}).then(portfolio => {
+//                 profitLoss = 0
+//                 no_of_stocks_giving_profit = 0
+//                 no_of_stocks_giving_loss = 0
+//                 portfolio.map(item => {
+//                     if(item.profitLoss >= 0) {no_of_stocks_giving_profit++}
+//                     if(item.profitLoss < 0) {no_of_stocks_giving_loss++}
+//                     profitLoss += item.profitLoss
+//                 })
+//                 leaderboard_data = {
+//                     creator_id: user._id,
+//                     creator_name: user.name,
+//                     no_of_stocks: portfolio.length,
+//                     no_of_stocks_giving_profit,
+//                     no_of_stocks_giving_loss,
+//                     profitLoss: Number(profitLoss).toFixed(2)
+//                 }
+//                 leaderboard.push(leaderboard_data)
+//             })
+
+            
+//         })
+
+//         setTimeout(() => {
+//             leaderboard.sort((a, b) => {
+//                 return b.profitLoss - a.profitLoss
+//             })
+//             res.send(leaderboard)
+//         }, 1000)
+        
+//     })
+// })
+
+router.get("/leaderboard", (req, res) => {
+    User.aggregate([
+        {
+            $lookup:
+                {
+                    from: "portfolios",
+                    localField: "_id",
+                    foreignField: "_creator",
+                    as: "portfolio"
+                }
+        },
+        {
+            $lookup:
+                {
+                    from: "money",
+                    localField: "_id",
+                    foreignField: "_creator",
+                    as: "money"
+                }
+            }
+        ]).then(data => {
+            leaderboard = []
+            data.map(user => {
+                money = user.money[0].money
+                shareWorth = 0
+                user.portfolio.map(port => {
+                    shareWorth += port.shareWorth
                 })
 
                 leaderboard_data = {
-                    creator_id: user._id,
-                    creator_name: user.name,
-                    no_of_stocks: portfolio.length,
-                    no_of_stocks_giving_profit,
-                    no_of_stocks_giving_loss,
-                    profitLoss: Number(profitLoss).toFixed(2)
+                    creator: user._id,
+                    name: user.name,
+                    profitLoss: (money + shareWorth - 10000).toFixed(2)
                 }
 
                 leaderboard.push(leaderboard_data)
             })
-
-            
-        })
-
-        setTimeout(() => {
-            leaderboard.sort((a, b) => {
+            leaderboard.sort((a,b) => {
                 return b.profitLoss - a.profitLoss
             })
             res.send(leaderboard)
-        }, 500)
-        
-    })
+        })
 })
 
 module.exports = router
