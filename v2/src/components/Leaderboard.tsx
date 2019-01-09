@@ -17,15 +17,16 @@ class Leaderboard extends React.Component {
     render() {
         return (
             <section className="container leaderboard">
-                <table className="table is-hoverable is-fullwidth">
-                    <thead>
-						<tr>
-							<th>Sr. No</th>
-							<th>Name of the User</th>
-							<th>Total Profit</th>
-						</tr>
-					</thead>
-                    { !this.state.gotData ? <h1>Loading....</h1> : 
+                
+                    { !this.state.gotData ? <h1 className="leaderboard_loader">Loading....</h1> : 
+                        <table className="table is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Name of the User</th>
+                                <th>Total Profit</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {
                                 this.state.leaderBoard.map((user, index) => {
@@ -41,8 +42,9 @@ class Leaderboard extends React.Component {
                                 })
                             }
                         </tbody>
+                        </table>
                     }
-                </table>
+                
             </section>
         )
     }

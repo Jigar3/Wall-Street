@@ -109,25 +109,13 @@
 .leaderboard {
     width: 40%;
     margin-top: 2rem;
+    user-select: none;
 }
 
-/* .leaderboard tbody tr:first-of-type {
-    font-weight: 500;
-    font-size: 1.45rem;
-} */
-
-/* .leaderboard tbody tr:nth-child(2) {
-    font-weight: 500;
-    font-size: 1.35rem;
-}
-
-.leaderboard tbody tr:nth-child(3) {
-    font-weight: 500;
-    font-size: 1.15rem;
-} */
-
-.loader {
-    size: 10rem;
+.leaderboard_loader {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.5rem;
 }
 
 #close {
