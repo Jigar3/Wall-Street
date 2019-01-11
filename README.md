@@ -21,9 +21,11 @@ yarn install
 yarn start
 ```
 
-The App uses a Mongo database so you will need to start a mongo service first on your local machine or if you don't want local mongo instance you can use mLab. Replace your mLabURI with the local one in mongoose-setup.js and put your username and password in a .env file. Sample env file is given.
+The App uses a Mongo database so you will need to start a mongo service first on your local machine or if you don't want local mongo instance you can use mLab. Replace your mLabURI with the local one in mongoose-setup.js and put your username and password in a .env file. Sample env file is given backend/.env.sample. Just replace it with your mLab credentials and rename the file to .env
 
 To add a feature request just create an issue.
+
+**For all the participants of OpenCode, I just want to tell you that this project might be a litle daunting given your experience level. You may face many problems in the setup itself, don't get disheartned and leave it in the middle. You may contact me anytime on [Facebook](https://www.facebook.com/jsc3998) and resolve your doubts. If you get stuck or don't know how to solve a particular issue or need some suggestions always feel free to ask me or anyone. Feel free to comment on any issues to get clarification, hint or any doubt you might have.**
 
 Enjoy!!
 
