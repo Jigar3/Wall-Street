@@ -4,13 +4,21 @@ The v1 of this project was made when I just started out learning React, so it ha
 
 To improve on all of it, I have made a v2 which is just more stable and better and with good practices. I have used TypeScript in React for the first time and really liked it, having static checking goes a long way in development process.
 
-To run the project use
+## Installation
+
+You need to have Node installed on your local machine. [Node](https://nodejs.org/en/)
+
+NPM(Node Package Manager is already bundled with Node). You can use yarn as well. Install Yarn from [here](https://yarnpkg.com/lang/en/docs/install/)
+
+To run the project
 
 ```
 cd v2/
 yarn install
 yarn start
 ```
+
+Yarn can be replaced by npm. 
 
 The above command will start the frontend
 
@@ -21,7 +29,7 @@ yarn install
 yarn start
 ```
 
-The App uses a Mongo database so you will need to start a mongo service first on your local machine or if you don't want local mongo instance you can use mLab. Replace your mLabURI with the local one in mongoose-setup.js and put your username and password in a .env file. Sample env file is given backend/.env.sample. Just replace it with your mLab credentials and rename the file to .env
+The App uses a [Mongo database](https://docs.mongodb.com/v3.2/administration/install-community/) so you will need to start a mongo service first on your local machine or if you don't want local mongo instance you can use [mLab](http://mlab.com). Replace your mLabURI with the local one in v2/backend/models/mongoose-setup.js and put your username and password in a .env file. Sample env file is given backend/.env.sample. Just replace it with your mLab credentials and rename the file to .env
 
 To add a feature request just create an issue.
 
