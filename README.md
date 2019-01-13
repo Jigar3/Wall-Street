@@ -1,5 +1,5 @@
 ## What is Wall Street?
-Wall Street is a virtual stock trading web application made using React. This application intends to help future investors learn the ups and downs of the stock market and build a portfolio for themselves.
+Wall Street is a virtual stock trading web application made using React. This application intends to help future investors learn the ups and downs of the stock market and build a portfolio of stocks for themselves. Beginning with a sum of **$10,000** you get a chance to get accustomed to the buying and selling of stocks, track your progress over a period of time and make yourself ready to conquer the stock market.
 
 ## Why Wall Street?
 
