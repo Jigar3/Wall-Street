@@ -182,3 +182,8 @@
 .level {
     padding: 1.75rem 0px;
 }
+#clock {
+    margin-top: 0.9px;
+    color: black;
+    font-size: 16px;
+}
