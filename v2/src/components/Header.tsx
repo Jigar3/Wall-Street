@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom"
 
 import LogOut from "../components/LogOut"
 import { getMarketStatus, setUserName } from "../utils/utils"
+import MyComponent from "../components/clock";
 
 export default class Header extends React.Component {
 
@@ -44,6 +45,9 @@ export default class Header extends React.Component {
                         </div>
         
                         <div className="navbar-end">
+                            <div className="navbar-item" id="clock">
+                                <MyComponent />
+                            </div>                                                                                                     
                             <div className="navbar-item">
                                 <a href="http://isnasdaqopen.com" target="_blank" id="status_label">Market Status:</a> 
                                     {sessionStorage.getItem("status") === "CLOSE" 
