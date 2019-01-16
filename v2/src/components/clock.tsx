@@ -1,7 +1,7 @@
 import React  from 'react';
 import Clock from 'react-live-clock';
  
-export default class MyComponent extends React.Component<any> {
+export default class LiveClock extends React.Component<any> {
     render() {
       return(
         <div>
