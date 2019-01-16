@@ -6,7 +6,7 @@ export default class LiveClock extends React.Component<any> {
       return(
         <div>
           IST &nbsp;
-          <Clock format={'HH:mm'} ticking={true} timezone={'Asia/Calcutta'} />
+          <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Calcutta'} />
         </div>
       )
     }
