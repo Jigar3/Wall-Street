@@ -18,7 +18,13 @@ class Leaderboard extends React.Component {
         return (
             <section className="container leaderboard">
                 
+		 <section className="hero is-primary is-bold">
+					<div className="hero-body">
+						<h1 className="title has-text-centered is-uppercase">Leaderboard</h1>
+					</div>
+				</section>
                     { !this.state.gotData ? <h1 className="leaderboard_loader">Loading....</h1> : 
+                       
                         <table className="table is-hoverable is-fullwidth">
                         <thead>
                             <tr>
