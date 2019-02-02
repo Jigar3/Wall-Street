@@ -99,9 +99,9 @@ class Home extends React.Component <PassedProps> {
 								<tr key={e._id}>
 									<td>{e.companyName}</td>
 									<td>{e.quantity}</td>
-									<td>$ {e.buyPrice}</td>
-									<td>$ {e.currPrice}</td>
-									<td>$ {e.shareWorth}</td>
+									<td>$ RoundOf({e.buyPrice},2)</td>
+									<td>$ RoundOf({e.currPrice},2)</td>
+									<td>$ RoundOf({e.shareWorth},2)</td>
 									<td>{e.profitLoss >= 0 ? <span id="profit">$ {e.profitLoss}</span> : <span id="loss">$ {e.profitLoss}</span>}</td>
 									<td><SellButton id={e._id} allValue={e}></SellButton></td>
 								</tr>
